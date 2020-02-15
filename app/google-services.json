@@ -1,34 +1,42 @@
 {
   "project_info": {
-    "project_number": "142281472685",
-    "firebase_url": "https://doshop-e795b.firebaseio.com",
-    "project_id": "doshop-e795b",
-    "storage_bucket": "doshop-e795b.appspot.com"
+    "project_number": "239527742071",
+    "firebase_url": "https://doshop-18ada.firebaseio.com",
+    "project_id": "doshop-18ada",
+    "storage_bucket": "doshop-18ada.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:142281472685:android:0ad0601eafa8444606a424",
+        "mobilesdk_app_id": "1:239527742071:android:0efce41af8b96d528fd472",
         "android_client_info": {
           "package_name": "com.example.doshop"
         }
       },
       "oauth_client": [
         {
-          "client_id": "142281472685-2t47dmnmeh7g2td56ljsrn5i7p1mkkmu.apps.googleusercontent.com",
+          "client_id": "239527742071-lub5vtslc7ecqqca5dpqoqnhlmfmi9lb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.doshop",
+            "certificate_hash": "fa6532f0a197c1daf570f0059036477c7b05fa13"
+          }
+        },
+        {
+          "client_id": "239527742071-ufbkn0rsmf8cfsqsleuun53o9dg689ih.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDPPcyxdqqIp6DVN90BIXKM9MZAfyUXURY"
+          "current_key": "AIzaSyBT4FWL9mX_EcRtMsfXxqMc2qM5J8YkpmU"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "142281472685-2t47dmnmeh7g2td56ljsrn5i7p1mkkmu.apps.googleusercontent.com",
+              "client_id": "239527742071-ufbkn0rsmf8cfsqsleuun53o9dg689ih.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
