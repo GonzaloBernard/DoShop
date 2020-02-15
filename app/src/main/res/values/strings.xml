@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">DoShop</string>
+    <string name="ButtonMisListas">Mis listas</string>
+    <string name="ButtonMisGrupos">Mis grupos</string>
+    <string name="ButtonCrearLista">Crear lista</string>
+    <string name="ButtonQuitarLista">Quitar</string>
+    <string name="ButtonBorrarGrupo">Borrar</string>
+    <string name="ButtonCrearGrupo">Crear Grupo</string>
+    <string name="ButtonEditarLista">Editar</string>
+    <string name="ButtonVerLista">Ver</string>
+</resources>

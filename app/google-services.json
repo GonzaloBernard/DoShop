@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "142281472685",
+    "firebase_url": "https://doshop-e795b.firebaseio.com",
+    "project_id": "doshop-e795b",
+    "storage_bucket": "doshop-e795b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:142281472685:android:0ad0601eafa8444606a424",
+        "android_client_info": {
+          "package_name": "com.example.doshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "142281472685-2t47dmnmeh7g2td56ljsrn5i7p1mkkmu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPPcyxdqqIp6DVN90BIXKM9MZAfyUXURY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "142281472685-2t47dmnmeh7g2td56ljsrn5i7p1mkkmu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
