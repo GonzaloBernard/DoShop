@@ -108,6 +108,8 @@ public class LoginUsuario extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            // Guardar usuario en base de datos
+                            createUserFirebase(mEmailField.getText().toString());
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -143,8 +145,6 @@ public class LoginUsuario extends AppCompatActivity {
                             Toast.makeText(LoginUsuario.this, "Authentication success.",Toast.LENGTH_SHORT).show();
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            // Guardar usuario en base de datos
-                            createUserFirebase(mEmailField.getText().toString());
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());

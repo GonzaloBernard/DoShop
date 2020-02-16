@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Grupo {
     private String grupoId;
     private String grupoNombre;
+
     private ArrayList<Usuario> usuarios;
 
     public Grupo(){}

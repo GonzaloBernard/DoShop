@@ -1,8 +1,11 @@
 package com.example.doshop;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,7 +50,14 @@ public class MisGrupos extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MisGrupos.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
+        buttonCrearGrupo.setOnClickListener(new Button.OnClickListener(){
 
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MisGrupos.this, AbmcGrupo.class);
+                startActivity(i);
+            }
+        });
 
     }
 
@@ -74,4 +84,6 @@ public class MisGrupos extends AppCompatActivity {
             }
         });
     }
+
+
 }
