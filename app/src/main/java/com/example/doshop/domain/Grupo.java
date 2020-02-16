@@ -1,22 +1,21 @@
 package com.example.doshop.domain;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Grupo {
-    private Integer id;
-    private String name;
+    private Integer grupoId;
+    private String grupoNombre;
     private ArrayList<Usuario> usuarios;
 
     public Grupo(){}
 
-    public void setId(Integer id){
-        this.id = id;
+    public void setGrupoId(Integer grupoId){
+        this.grupoId = grupoId;
     }
-    public Integer getId(){return id; }
+    public Integer getGrupoId(){return grupoId; }
 
-    public void setName(String name){
-        this.name = name;
+    public void setGrupoNombre(String grupoNombre){
+        this.grupoNombre = grupoNombre;
     }
-    public String getName(){return name; }
+    public String getGrupoNombre(){return grupoNombre; }
 }
