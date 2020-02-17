@@ -135,7 +135,7 @@ public class AbmcGrupo extends AppCompatActivity {
 
 
         ArrayList<Producto> listaProductos = new ArrayList<>();
-        //listaProductos.add(producto);
+        //listaProductos.add(productoHC);
         grupo.setListaProductos(listaProductos);
         databaseGrupos.child(id).setValue(grupo);
         Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
