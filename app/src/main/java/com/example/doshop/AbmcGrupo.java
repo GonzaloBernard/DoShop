@@ -2,6 +2,7 @@ package com.example.doshop;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -27,45 +28,59 @@ public class AbmcGrupo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abmc_grupo);
 
-        try {
-            // Initialize Firebase Auth
-            mAuth = FirebaseAuth.getInstance();
-            // Get usuario autentificado
-            FirebaseUser currentUser = mAuth.getCurrentUser();
-            //Usuario conectado
-            String user = currentUser.getUid();
-            // Referencia a la tabla grupos
-            databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
-            // findViews
-            buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
-            etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+        final Resources resources = getResources();
+        Bundle extras = getIntent().getExtras();
 
-            buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        // Get usuario autentificado
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //Usuario conectado
+        String user = currentUser.getUid();
+        // Referencia a la tabla grupos
+        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
 
-                @Override
-                public void onClick(View view) {
-                    // Insertar grupo en Firebase database
-                    createGrupoFirebase(etNombreGrupo.getText().toString());
-                    // Retornar a MisGrupos
-                    finish();
+        switch (extras.getInt(GrupoAdapter._ABMC_GRUPO_MODO_KEY)) {
+            case GrupoAdapter._KEY_CREAR_GRUPO:
+                try {
+                    // findViews
+                    buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
+                    etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                    buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            // Insertar grupo en Firebase database
+                            String grupoId = createGrupoFirebase(etNombreGrupo.getText().toString());
+                            // Retornar a MisGrupos
+                            finish();
+                        }
+                    });
                 }
-            });
+                catch (Exception e){
+                    Toast.makeText(AbmcGrupo.this, "Error !!!",Toast.LENGTH_SHORT).show();
+                    Log.e("Error ::::: ",e.getMessage());
+                }
+                break;
+            case GrupoAdapter._KEY_BORRAR_GRUPO:
+                String grupoId = extras.getString(GrupoAdapter._GRUPO_KEY);
+                //ELIMINAR EL GRUPO DE FIREBASE DATABASE
+                databaseGrupos.child(grupoId).removeValue();
+                finish();
+                break;
         }
-        catch (Exception e){
-            Toast.makeText(AbmcGrupo.this, "Error !!!",Toast.LENGTH_SHORT).show();
-            Log.e("Error ::::: ",e.getMessage());
-        }
+
     }
 
 
 
     // Insertar usuario en al base de datos Firebase
-    private void createGrupoFirebase(String nombreGrupo) {
+    private String createGrupoFirebase(String nombreGrupo) {
         String id = databaseGrupos.push().getKey();
         Grupo grupo = new Grupo();
         grupo.setGrupoId(id);
         grupo.setGrupoNombre(nombreGrupo);
         databaseGrupos.child(id).setValue(grupo);
         Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
+        return id;
     }
 }

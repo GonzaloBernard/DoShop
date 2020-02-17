@@ -48,7 +48,7 @@ public class MisGrupos extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //Usuario conectado
         String user = currentUser.getUid();
-        
+
         databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
 
         // findViews
@@ -65,6 +65,8 @@ public class MisGrupos extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(MisGrupos.this, AbmcGrupo.class);
+                //EL MODO DETERMINA LA ACCION A REALIZAR
+                i.putExtra(GrupoAdapter._ABMC_GRUPO_MODO_KEY, GrupoAdapter._KEY_CREAR_GRUPO );
                 startActivity(i);
             }
         });
