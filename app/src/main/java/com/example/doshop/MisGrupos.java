@@ -3,6 +3,7 @@ package com.example.doshop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,6 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doshop.domain.Grupo;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -29,6 +32,7 @@ public class MisGrupos extends AppCompatActivity {
     private List<Grupo> listaDataSet;
     private RecyclerView.Adapter mAdapter;
     DatabaseReference databaseGrupos;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +42,14 @@ public class MisGrupos extends AppCompatActivity {
         //Inicializo la lista de grupos
         listaDataSet = new ArrayList<>();
 
-        // Referencia a la tabla grupos
-        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos");
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        // Get usuario autentificado
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //Usuario conectado
+        String user = currentUser.getUid();
+        
+        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
 
         // findViews
         buttonCrearGrupo = (Button) findViewById(R.id.buttonCrearGrupo);

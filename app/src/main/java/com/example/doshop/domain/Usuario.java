@@ -5,6 +5,7 @@ import java.util.Objects;
 public class Usuario {
     private String userId;
     private String userName;
+    private String userUid;
 
     public Usuario(){}
 
@@ -22,5 +23,13 @@ public class Usuario {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getUserUid() {
+        return userUid;
+    }
+
+    public void setUserUid(String userUid) {
+        this.userUid = userUid;
     }
 }

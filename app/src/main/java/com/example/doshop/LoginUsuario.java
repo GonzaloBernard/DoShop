@@ -40,6 +40,10 @@ public class LoginUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        // Get usuario autentificado
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        // Referencia a la tabla usuarios
         databaseUsers = FirebaseDatabase.getInstance().getReference("usuarios");
 
 
@@ -123,10 +127,20 @@ public class LoginUsuario extends AppCompatActivity {
     }
     // Insertar usuario en al base de datos Firebase
     private void createUserFirebase(String userEmail) {
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        // Get usuario autentificado
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //Usuario conectado
+        String userUid = currentUser.getUid();
+        // Crear id para el nuevo usuario
         String id = databaseUsers.push().getKey();
+        // Crear el objeto usuario con sus atributos
         Usuario usuario = new Usuario();
         usuario.setUserId(id);
         usuario.setUserName(userEmail);
+        usuario.setUserUid(userUid);
+        // Guardar el usuario creado
         databaseUsers.child(id).setValue(usuario);
         Toast.makeText(LoginUsuario.this, "Usuario Firebase creado ",Toast.LENGTH_SHORT).show();
     }
