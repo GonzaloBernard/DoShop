@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private FirebaseUser currentUser;
     private TextView tvUsuarioLogeado;
 
     @Override
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         final Button buttonMisListas = (Button) findViewById(R.id.buttonMisListas);
         final Button buttonMisGrupos = (Button) findViewById(R.id.buttonMisGrupos);
         tvUsuarioLogeado = (TextView) findViewById(R.id.usuarioLogeado);
+
 
         buttonMisListas.setOnClickListener(new Button.OnClickListener() {
                @Override
@@ -48,12 +50,17 @@ public class MainActivity extends AppCompatActivity {
            }
        });
 
+        // Get usuario logueado actualmente
+        currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
+
     }
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        // Get usuario logueado actualmente
+        currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
     @Override
@@ -65,8 +72,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuSignOut:
-                Intent i = new Intent(MainActivity.this, LoginUsuario.class);
-                startActivity(i);
+                mAuth.signOut();
+                finish();
                 return true;
 
             default:
@@ -79,10 +86,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void updateUI(FirebaseUser user) {
-        if (user != null) {
-            tvUsuarioLogeado.setText(user.getEmail());
-        } else {
-            tvUsuarioLogeado.setText("No hay usuario");
+        if (user == null) {
+            mAuth.signOut();
+        }
+        else {
+            tvUsuarioLogeado.setText(currentUser.getEmail());
         }
     }
 }
