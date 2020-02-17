@@ -51,7 +51,7 @@ public class MisListas extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        final Button buttonCrearLista = (Button) findViewById(R.id.buttonCrearLista);
+        final Button bAgregarArticulo = (Button) findViewById(R.id.bMisListasAgregarArticulo);
         mRecyclerView = (RecyclerView) findViewById(R.id.ListasRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MisListas.this);

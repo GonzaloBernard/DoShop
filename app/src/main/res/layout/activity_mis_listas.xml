@@ -11,10 +11,10 @@
         android:elevation="4dp"
         android:theme="@style/Theme.AppCompat.Light" />
     <Button
-        android:id="@+id/buttonCrearLista"
+        android:id="@+id/bMisListasAgregarArticulo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/ButtonCrearLista" />
+        android:text="Agregar artículo" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ListasRecyclerView"
         android:scrollbars="vertical"
