@@ -88,6 +88,9 @@ public class AbmcGrupo extends AppCompatActivity {
                 });
 
                 break;
+
+            //  AGREGAR UN MIEMBRO A UN GRUPO
+            // En este caso habría que buscar la forma de validar el email del usuario ingresado
             case GrupoAdapter._KEY_INVITAR_USUARIO:
                 grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
                 // findViews
@@ -99,6 +102,9 @@ public class AbmcGrupo extends AppCompatActivity {
                 buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+                        ////////////////////////////////////////////////////////////
+                        //  FALTA VALIDAR QUE EL EMAIL EXISTA EN BASE DE DATOS!!! //
+                        ////////////////////////////////////////////////////////////
                         grupo.addidUsuariosInvitados(etNombreGrupo.getText().toString());
                         databaseGrupos.child(grupo.getGrupoId()).setValue(grupo);
                         finish();
