@@ -45,6 +45,7 @@ public class AbmcGrupo extends AppCompatActivity {
                 try {
                     // findViews
                     buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
+                    buttonAltaGrupo.setText("Crear grupo");
                     etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
                     buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                         @Override
@@ -62,10 +63,27 @@ public class AbmcGrupo extends AppCompatActivity {
                 }
                 break;
             case GrupoAdapter._KEY_BORRAR_GRUPO:
-                String grupoId = extras.getString(GrupoAdapter._GRUPO_KEY);
+                String grupoIdBorrar = extras.getString(GrupoAdapter._GRUPO_KEY);
                 //ELIMINAR EL GRUPO DE FIREBASE DATABASE
-                databaseGrupos.child(grupoId).removeValue();
+                databaseGrupos.child(grupoIdBorrar).removeValue();
                 finish();
+                break;
+            case GrupoAdapter._KEY_EDITAR_GRUPO:
+                final Grupo grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
+                // findViews
+                buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
+                buttonAltaGrupo.setText("Editar grupo");
+                etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                etNombreGrupo.setText(grupo.getGrupoNombre());
+                buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        grupo.setGrupoNombre(etNombreGrupo.getText().toString());
+                        databaseGrupos.child(grupo.getGrupoId()).setValue(grupo);
+                        finish();
+                    }
+                });
+
                 break;
         }
 

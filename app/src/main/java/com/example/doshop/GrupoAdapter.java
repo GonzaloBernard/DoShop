@@ -77,6 +77,38 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
             }
 
         });
+
+        ///////////////////////////////
+        //CLICK EN BOTON EDITAR//////
+        ///////////////////////////////
+        holder.bEditarGrupo.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                builder.setMessage("Quiere editar el grupo?")
+                        .setTitle("EDITAR GRUPO")
+                        .setPositiveButton("EDITAR",
+                                new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dlgInt, int i) {
+                                        Intent intent = new Intent(context, AbmcGrupo.class);
+                                        //EL MODO DETERMINA LA ACCION A REALIZAR
+                                        intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_EDITAR_GRUPO );
+                                        //SE EDITA EL GRUPO
+                                        intent.putExtra(_GRUPO_KEY, grupo );
+                                        ((Activity) context).startActivity(intent);
+                                    }
+                                }).setNegativeButton("CONSERVAR",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dlgInt, int i) {
+                            }
+                        });
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+
+        });
     }
     public class GrupoHolder extends RecyclerView.ViewHolder {
 
