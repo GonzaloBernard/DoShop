@@ -3,21 +3,22 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarMisListas"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/Theme.AppCompat.Light" />
+    <Button
+        android:id="@+id/buttonCrearLista"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ButtonCrearLista" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/ListasRecyclerView"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <Button
-            android:id="@+id/buttonCrearLista"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/ButtonCrearLista" />
-    </LinearLayout>
-
 
 </LinearLayout>

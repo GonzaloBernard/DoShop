@@ -109,18 +109,31 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
             }
 
         });
+
+        ///////////////////////////////
+        //CLICK EN BOTON EDITAR//////
+        ///////////////////////////////
+        holder.bVerLista.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, MisListas.class);
+                ((Activity) context).startActivity(intent);
+            }
+        });
     }
     public class GrupoHolder extends RecyclerView.ViewHolder {
 
         TextView tvGrupoNombre;
         Button bEditarGrupo;
         Button bEliminarGrupo;
+        Button bVerLista;
 
         public GrupoHolder(View base) {
             super(base);
             this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
             this.bEditarGrupo = (Button) base.findViewById(R.id.bEditarGrupo);
             this.bEliminarGrupo = (Button) base.findViewById(R.id.bEliminarGrupo);
+            this.bVerLista = (Button) base.findViewById(R.id.bVerLista);
 
         }
     }

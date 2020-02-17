@@ -18,29 +18,37 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+            <Button
+                android:id="@+id/bEditarGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="Editar"
+                android:visibility="visible" />
+
+            <Button
+                android:id="@+id/bEliminarGrupo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="Eliminar"
+                android:visibility="visible" />
+            <Button
+                android:id="@+id/bVerLista"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin"
+                android:text="VER LISTA"
+                android:visibility="visible" />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_gravity="center_horizontal">
-
-
-        <Button
-            android:id="@+id/bEditarGrupo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
-            android:text="Editar"
-            android:visibility="visible" />
-
-        <Button
-            android:id="@+id/bEliminarGrupo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
-            android:text="Eliminar"
-            android:visibility="visible" />
-    </LinearLayout>
 </androidx.cardview.widget.CardView>

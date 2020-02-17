@@ -32,7 +32,6 @@ import java.util.List;
 public class MisGrupos extends AppCompatActivity {
 
     private RecyclerView mRecyclerView;
-    private Button buttonCrearGrupo;
     private List<Grupo> listaDataSet;
     private RecyclerView.Adapter mAdapter;
     DatabaseReference databaseGrupos;
@@ -46,8 +45,17 @@ public class MisGrupos extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.menuPrincipalCrearGrupo:
+                Intent i1 = new Intent(MisGrupos.this, AbmcGrupo.class);
+                //EL MODO DETERMINA LA ACCION A REALIZAR
+                i1.putExtra(GrupoAdapter._ABMC_GRUPO_MODO_KEY, GrupoAdapter._KEY_CREAR_GRUPO );
+                startActivity(i1);
+                return true;
             case R.id.menuSignOut:
-                onBackPressed();
+                mAuth.signOut();
+                finish();
+                Intent i2 = new Intent (MisGrupos.this,LoginUsuario.class);
+                startActivity(i2);
                 return true;
 
             default:
@@ -84,8 +92,6 @@ public class MisGrupos extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        // findViews
-        buttonCrearGrupo = (Button) findViewById(R.id.buttonCrearGrupo);
 
         // RECYCLER VIEW
         mRecyclerView = (RecyclerView) findViewById(R.id.GruposRecyclerView);
@@ -93,25 +99,10 @@ public class MisGrupos extends AppCompatActivity {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MisGrupos.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        buttonCrearGrupo.setOnClickListener(new Button.OnClickListener(){
-
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(MisGrupos.this, AbmcGrupo.class);
-                //EL MODO DETERMINA LA ACCION A REALIZAR
-                i.putExtra(GrupoAdapter._ABMC_GRUPO_MODO_KEY, GrupoAdapter._KEY_CREAR_GRUPO );
-                startActivity(i);
-            }
-        });
-
     }
 
     @Override
     public void onBackPressed() {
-        mAuth.signOut();
-        finish();
-        Intent i = new Intent (MisGrupos.this,LoginUsuario.class);
-        startActivity(i);
     }
 
     @Override
