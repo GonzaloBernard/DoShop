@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.doshop.domain.Grupo;
+import com.example.doshop.domain.Usuario;
+
 import java.util.List;
 
 public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder> {
@@ -111,7 +113,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         });
 
         ///////////////////////////////
-        //CLICK EN BOTON EDITAR//////
+        //CLICK EN BOTON VER LISTA//////
         ///////////////////////////////
         holder.bVerLista.setOnClickListener(new Button.OnClickListener(){
             @Override
@@ -120,6 +122,27 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
                 ((Activity) context).startActivity(intent);
             }
         });
+        ///////////////////////////////////////
+        //CLICK EN BOTON INVITAR USUARIO //////
+        ///////////////////////////////////////
+        holder.bInvitarUsuario.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                // USUARIO INVITADO HARDCODEADO
+
+                grupo.getidUsuariosInvitados().add("-M0GOUwvYfBSCsRm_OJF");
+                grupo.getidUsuariosInvitados().add("-M0GOF6tMB93OxzOw85F");
+
+                Intent intent = new Intent(context, AbmcGrupo.class);
+                //EL MODO DETERMINA LA ACCION A REALIZAR
+                intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_EDITAR_GRUPO );
+                //SE EDITA EL GRUPO
+                intent.putExtra(_GRUPO_KEY, grupo );
+                ((Activity) context).startActivity(intent);
+
+            }
+        });
+
     }
     public class GrupoHolder extends RecyclerView.ViewHolder {
 
@@ -127,6 +150,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         Button bEditarGrupo;
         Button bEliminarGrupo;
         Button bVerLista;
+        Button bInvitarUsuario;
 
         public GrupoHolder(View base) {
             super(base);
@@ -134,6 +158,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
             this.bEditarGrupo = (Button) base.findViewById(R.id.bEditarGrupo);
             this.bEliminarGrupo = (Button) base.findViewById(R.id.bEliminarGrupo);
             this.bVerLista = (Button) base.findViewById(R.id.bVerLista);
+            this.bInvitarUsuario = (Button) base.findViewById(R.id.bInvitarUsuario);
 
         }
     }

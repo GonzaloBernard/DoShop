@@ -1,5 +1,6 @@
 package com.example.doshop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,9 +13,15 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+
 public class MisListas extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView mRecyclerView;
+    DatabaseReference databaseListas;
+    private FirebaseAuth mAuth;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -25,6 +32,13 @@ public class MisListas extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()) {
+            case R.id.menuGruposAgregarProducto:
+                //Intent i1 = new Intent(MisListas.this, AbmcLista.class);
+                //EL MODO DETERMINA LA ACCION A REALIZAR
+                //i1.putExtra(GrupoAdapter._ABMC_LISTA_MODO_KEY, GrupoAdapter._KEY_AGREGAR_PRODUCTO );
+                //startActivity(i1);
+                return true;
+
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -46,12 +60,11 @@ public class MisListas extends AppCompatActivity {
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle( "LISTAS DEL GRUPO:" );
+            actionBar.setTitle( "LISTA DE PRODUCTOS" );
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
 
-        final Button bAgregarArticulo = (Button) findViewById(R.id.bMisListasAgregarArticulo);
         mRecyclerView = (RecyclerView) findViewById(R.id.ListasRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MisListas.this);

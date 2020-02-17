@@ -1,32 +1,70 @@
 package com.example.doshop.domain;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Objects;
 
-public class Producto {
-    private Integer id;
-    private String name;
-    private String brand;
-    private String description;
+public class Producto implements Parcelable {
+    private String productoId;
+    private String productoNombre;
+    private String productoDescripcion;
 
     public Producto(){}
-
-    public void setId(Integer id){
-        this.id = id;
+    public Producto(Parcel in){
+        readFromParcel(in);
     }
-    public Integer getId(){return id; }
 
-    public void setName(String name){
-        this.name = name;
+    public String getProductoId() {
+        return productoId;
     }
-    public String getName(){return name; }
 
-    public void setBrand(String brand){
-        this.brand = brand;
+    public void setProductoId(String productoId) {
+        this.productoId = productoId;
     }
-    public String getBrand(){return brand; }
 
-    public void setDescription(String description){
-        this.description =description;
+    public String getProductoNombre() {
+        return productoNombre;
     }
-    public String getDescription(){return description; }
+
+    public void setProductoNombre(String productoNombre) {
+        this.productoNombre = productoNombre;
+    }
+
+    public String getProductoDescripcion() {
+        return productoDescripcion;
+    }
+
+    public void setProductoDescripcion(String productoDescripcion) {
+        this.productoDescripcion = productoDescripcion;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(productoId);
+        dest.writeString(productoNombre);
+        dest.writeString(productoDescripcion);
+    }
+
+    private void readFromParcel(Parcel in) {
+        this.productoId = in.readString();
+        this.productoNombre = in.readString();
+        this.productoDescripcion = in.readString();
+    }
+
+    public static final Parcelable.Creator<Producto> CREATOR = new Parcelable.Creator<Producto>() {
+        public Producto createFromParcel(Parcel in) {
+            return new Producto(in);
+        }
+
+        public Producto[] newArray(int size) {
+            return new Producto[size];
+        }
+    };
 }

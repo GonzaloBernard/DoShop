@@ -11,10 +11,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.doshop.domain.Grupo;
+import com.example.doshop.domain.Producto;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
 
 public class AbmcGrupo extends AppCompatActivity {
 
@@ -97,6 +100,18 @@ public class AbmcGrupo extends AppCompatActivity {
         Grupo grupo = new Grupo();
         grupo.setGrupoId(id);
         grupo.setGrupoNombre(nombreGrupo);
+
+        // Producto Hardcodeado //
+        Producto productoHC = new Producto();
+        productoHC.setProductoId("1");
+        productoHC.setProductoNombre("Producto 1");
+        productoHC.setProductoDescripcion("descripcionnnnnn");
+        // Producto Hardcodeado //
+
+
+        ArrayList<Producto> listaProductos = new ArrayList<>();
+        //listaProductos.add(producto);
+        grupo.setListaProductos(listaProductos);
         databaseGrupos.child(id).setValue(grupo);
         Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
         return id;
