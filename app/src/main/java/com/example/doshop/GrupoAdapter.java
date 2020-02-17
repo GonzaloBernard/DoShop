@@ -130,8 +130,8 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
             public void onClick(View view) {
                 // USUARIO INVITADO HARDCODEADO
 
-                grupo.getidUsuariosInvitados().add("-M0GOUwvYfBSCsRm_OJF");
-                grupo.getidUsuariosInvitados().add("-M0GOF6tMB93OxzOw85F");
+                //grupo.getidUsuariosInvitados().add("-M0GOUwvYfBSCsRm_OJF");
+                //grupo.getidUsuariosInvitados().add("-M0GOF6tMB93OxzOw85F");
 
                 Intent intent = new Intent(context, AbmcGrupo.class);
                 //EL MODO DETERMINA LA ACCION A REALIZAR
