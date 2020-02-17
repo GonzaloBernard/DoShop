@@ -42,7 +42,7 @@ public class AbmcGrupo extends AppCompatActivity {
         String user = currentUser.getUid();
         // Referencia a la tabla grupos
         databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
-
+        final Grupo grupo;
         switch (extras.getInt(GrupoAdapter._ABMC_GRUPO_MODO_KEY)) {
             case GrupoAdapter._KEY_CREAR_GRUPO:
                 try {
@@ -72,7 +72,7 @@ public class AbmcGrupo extends AppCompatActivity {
                 finish();
                 break;
             case GrupoAdapter._KEY_EDITAR_GRUPO:
-                final Grupo grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
+                grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
                 // findViews
                 buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
                 buttonAltaGrupo.setText("Editar grupo");
@@ -82,6 +82,24 @@ public class AbmcGrupo extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         grupo.setGrupoNombre(etNombreGrupo.getText().toString());
+                        databaseGrupos.child(grupo.getGrupoId()).setValue(grupo);
+                        finish();
+                    }
+                });
+
+                break;
+            case GrupoAdapter._KEY_INVITAR_USUARIO:
+                grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
+                // findViews
+                buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
+                buttonAltaGrupo.setText("Invitar Usuario");
+                etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+
+
+                buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        grupo.addidUsuariosInvitados(etNombreGrupo.getText().toString());
                         databaseGrupos.child(grupo.getGrupoId()).setValue(grupo);
                         finish();
                     }
@@ -100,7 +118,7 @@ public class AbmcGrupo extends AppCompatActivity {
         Grupo grupo = new Grupo();
         grupo.setGrupoId(id);
         grupo.setGrupoNombre(nombreGrupo);
-        grupo.addidUsuariosInvitados(mAuth.getCurrentUser().getUid());
+        grupo.addidUsuariosInvitados(mAuth.getCurrentUser().getEmail());
         // Producto Hardcodeado //
         Producto productoHC = new Producto();
         productoHC.setProductoId("1");

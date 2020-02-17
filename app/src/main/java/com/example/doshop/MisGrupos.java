@@ -113,7 +113,7 @@ public class MisGrupos extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaDataSet.clear();
-                String usuario = mAuth.getCurrentUser().getUid();
+                String usuario = mAuth.getCurrentUser().getEmail();
 
                 for(DataSnapshot grupoSnapshot: dataSnapshot.getChildren()){
                     for (DataSnapshot data: grupoSnapshot.getChildren()){

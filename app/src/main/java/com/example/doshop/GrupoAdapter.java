@@ -24,6 +24,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
     public static final int _KEY_CREAR_GRUPO = 1;
     public static final int _KEY_BORRAR_GRUPO = 2;
     public static final int _KEY_EDITAR_GRUPO = 3;
+    public static final int _KEY_INVITAR_USUARIO = 4;
     public static final String _GRUPO_KEY = "_GRUPO_KEY";
 
     public GrupoAdapter(List<Grupo> myDataset) {
@@ -135,7 +136,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
 
                 Intent intent = new Intent(context, AbmcGrupo.class);
                 //EL MODO DETERMINA LA ACCION A REALIZAR
-                intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_EDITAR_GRUPO );
+                intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_INVITAR_USUARIO );
                 //SE EDITA EL GRUPO
                 intent.putExtra(_GRUPO_KEY, grupo );
                 ((Activity) context).startActivity(intent);
