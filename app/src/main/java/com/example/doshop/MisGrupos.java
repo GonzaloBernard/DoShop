@@ -4,12 +4,16 @@ package com.example.doshop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +39,24 @@ public class MisGrupos extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuSignOut:
+                onBackPressed();
+                return true;
+
+            default:
+                Toast.makeText(this, ". . . . ", Toast.LENGTH_LONG).show();
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_grupos);
@@ -50,6 +72,17 @@ public class MisGrupos extends AppCompatActivity {
         String user = currentUser.getUid();
 
         databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
+
+
+        //TOOLBAR
+        try {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMisGrupos);
+            setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setTitle(currentUser.getEmail());
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
         // findViews
         buttonCrearGrupo = (Button) findViewById(R.id.buttonCrearGrupo);
@@ -71,6 +104,14 @@ public class MisGrupos extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        mAuth.signOut();
+        finish();
+        Intent i = new Intent (MisGrupos.this,LoginUsuario.class);
+        startActivity(i);
     }
 
     @Override

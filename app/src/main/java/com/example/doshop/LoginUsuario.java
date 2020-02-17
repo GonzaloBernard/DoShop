@@ -6,10 +6,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.doshop.domain.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,6 +36,16 @@ public class LoginUsuario extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //TOOLBAR
+        try {
+            Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarLogin);
+            setSupportActionBar(toolbar);
+            ActionBar actionBar = getSupportActionBar();
+            actionBar.setTitle("Bienvenido a Do Shop");
+        } catch (Exception e) {
+            Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+        }
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -84,8 +95,9 @@ public class LoginUsuario extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                Intent i = new Intent(LoginUsuario.this, MainActivity.class);
+                                Intent i = new Intent(LoginUsuario.this, MisGrupos.class);
                                 startActivity(i);
+                                finish();
                             }
                             catch (Exception e){
                                 Log.w(TAG, e.getMessage(), task.getException());
@@ -135,8 +147,9 @@ public class LoginUsuario extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
                                 Toast.makeText(LoginUsuario.this, "Authentication success.", Toast.LENGTH_SHORT).show();
-                                Intent i = new Intent(LoginUsuario.this, MainActivity.class);
+                                Intent i = new Intent(LoginUsuario.this, MisGrupos.class);
                                 startActivity(i);
+                                finish();
                             }
                             catch (Exception e){
                                 // If sign in fails, display a message to the user.
