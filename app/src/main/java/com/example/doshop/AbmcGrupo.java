@@ -97,6 +97,7 @@ public class AbmcGrupo extends AppCompatActivity {
                 buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
                 buttonAltaGrupo.setText("Invitar Usuario");
                 etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                etNombreGrupo.setHint("Correo del usuario");
 
 
                 buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
