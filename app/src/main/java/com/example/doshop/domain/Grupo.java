@@ -50,6 +50,9 @@ public class Grupo implements Parcelable {
     public void setidUsuariosInvitados(List<String> idUsuariosInvitados) {
         this.idUsuariosInvitados = idUsuariosInvitados;
     }
+    public void addidUsuariosInvitados(String usuarioInvitadoId){
+        this.idUsuariosInvitados.add(usuarioInvitadoId);
+    }
 
     @Override
     public int describeContents() {

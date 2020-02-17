@@ -79,7 +79,7 @@ public class MisGrupos extends AppCompatActivity {
         //Usuario conectado
         String user = currentUser.getUid();
 
-        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
+        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos");
 
 
         //TOOLBAR
@@ -113,9 +113,19 @@ public class MisGrupos extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaDataSet.clear();
+                String usuario = mAuth.getCurrentUser().getUid();
+
                 for(DataSnapshot grupoSnapshot: dataSnapshot.getChildren()){
-                    Grupo grupo = grupoSnapshot.getValue(Grupo.class);
-                    listaDataSet.add(grupo);
+                    for (DataSnapshot data: grupoSnapshot.getChildren()){
+                        Grupo grupo = data.getValue(Grupo.class);
+
+                        // CORROBORAR QUE EL USUARIO ES MIEMBRO DEL GRUPO
+                        if(grupo.getidUsuariosInvitados().contains(usuario)){
+                            listaDataSet.add(grupo);
+                        }
+                        // MUESTRA TODOS LOS GRUPOS
+                        //listaDataSet.add(grupo);
+                    }
                 }
                 mAdapter = new GrupoAdapter( listaDataSet );
                 mRecyclerView.setAdapter(mAdapter);
