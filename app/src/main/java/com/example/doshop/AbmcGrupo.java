@@ -5,8 +5,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.content.res.Resources;
 import android.os.Bundle;
+import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,7 +20,6 @@ import com.example.doshop.domain.Producto;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -110,6 +109,7 @@ public class AbmcGrupo extends AppCompatActivity {
                 buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
                 buttonAltaGrupo.setText("Editar grupo");
                 etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                etNombreGrupo.setInputType(InputType.TYPE_TEXT_VARIATION_NORMAL);
                 etNombreGrupo.setText(grupo.getGrupoNombre());
                 buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                     @Override
@@ -121,16 +121,17 @@ public class AbmcGrupo extends AppCompatActivity {
                 });
 
                 break;
-
-            //  AGREGAR UN MIEMBRO A UN GRUPO
-            // En este caso habría que buscar la forma de validar el email del usuario ingresado
             case GrupoAdapter._KEY_INVITAR_USUARIO:
+                //  AGREGAR UN MIEMBRO A UN GRUPO
+                // En este caso habría que buscar la forma de validar el email del usuario ingresado
                 grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
                 // findViews
                 buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
                 buttonAltaGrupo.setText("Invitar Usuario");
                 etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                // REUTILIZO EL EditText nombre del grupo
                 etNombreGrupo.setHint("Correo del usuario");
+                etNombreGrupo.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
 
 
                 buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
