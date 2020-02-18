@@ -54,7 +54,7 @@ public class LoginUsuario extends AppCompatActivity {
         databaseUsers = FirebaseDatabase.getInstance().getReference("usuarios");
 
 
-        mEmailField = (EditText) findViewById(R.id.username);
+        mEmailField = (EditText) findViewById(R.id.Email);
         mPasswordField = (EditText) findViewById(R.id.password);
         loginButton = (Button) findViewById(R.id.login);
         signinButton = (Button) findViewById(R.id.signin);

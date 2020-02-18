@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
@@ -11,29 +12,43 @@
         android:id="@+id/toolbarLogin"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/Theme.AppCompat.Light" />
 
+    <LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center">
+
+       <ImageView
+          android:id="@+id/imageView"
+          android:layout_width="200dp"
+          android:layout_height="200dp"
+          android:background="@drawable/logo_login"/>
+
+    </LinearLayout>
+
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
         android:ems="14"
-        android:textSize="20sp"
-        android:maxLength="40"/>
+        android:hint="@string/EditTextEmailLogin"
+        android:inputType="textEmailAddress"
+        android:maxLength="40"
+        android:textSize="20sp" />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
         android:ems="14"
-        android:textSize="20sp"
-        android:maxLength="20"/>
+        android:hint="@string/EditTextContraseñaLogin"
+        android:inputType="textPassword"
+        android:maxLength="20"
+        android:textSize="20sp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -42,16 +57,21 @@
 
         <Button
             android:id="@+id/login"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:enabled="true"
-            android:text="Crear Usuario" />
+            android:text="@string/ButtonCrearUsuario" />
+
         <Button
             android:id="@+id/signin"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:enabled="true"
-            android:text="Sign In" />
+
+            android:text="@string/ButtonSignIn" />
+
     </LinearLayout>
 
     <ProgressBar
@@ -64,4 +84,6 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="64dp"
         android:visibility="gone" />
+
+
 </LinearLayout>
