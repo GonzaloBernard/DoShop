@@ -31,6 +31,9 @@ public class AbmcGrupo extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abmc_grupo);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher);
+
         final Resources resources = getResources();
         Bundle extras = getIntent().getExtras();
 
