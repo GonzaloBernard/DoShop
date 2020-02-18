@@ -37,11 +37,13 @@ public class LoginUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //TOOLBAR
+         //TOOLBAR
         try {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarLogin);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setIcon(R.mipmap.ic_launcher);
             actionBar.setTitle("Bienvenido a Do Shop");
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
