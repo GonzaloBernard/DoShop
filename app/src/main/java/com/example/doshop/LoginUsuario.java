@@ -86,27 +86,25 @@ public class LoginUsuario extends AppCompatActivity {
         loginButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                if(validateForm()){
+                    createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                }
             }
-
         });
 
         signinButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-
+                if(validateForm()) {
+                    signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                }
             }
         });
 
     }
 
-    private void createAccount(String email, String password) {
-        if (!validateForm()) {
-            return;
-        }
+    private void createAccount(final String email, String password) {
+
         // [START create_user_with_email]
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -115,7 +113,7 @@ public class LoginUsuario extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             try {
                                 // Guardar usuario en base de datos
-                                createUserFirebase(mEmailField.getText().toString());
+                                createUserFirebase(email);
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "createUserWithEmail:success");
                                 FirebaseUser user = mAuth.getCurrentUser();
@@ -159,9 +157,6 @@ public class LoginUsuario extends AppCompatActivity {
     }
     private void signIn(String email, String password) {
 
-        if (!validateForm()) {
-            return;
-        }
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -192,8 +187,17 @@ public class LoginUsuario extends AppCompatActivity {
     }
 
     // Validaciones para los datos de entrada
-    private boolean validateForm() {
+    private Boolean validateForm() {
         boolean valid = true;
+        try{
+            // Aca van todoss los datos de entrada
+            if (mEmailField.getText().toString().length()<6) throw new Exception("Invalid Email");
+            if (mPasswordField.getText().toString().length()<6) throw new Exception("Invalid Password");
+        }
+        catch (Exception e){
+            valid=false;
+            Toast.makeText(LoginUsuario.this, e.getMessage(),Toast.LENGTH_SHORT).show();
+        }
         return valid;
     }
 

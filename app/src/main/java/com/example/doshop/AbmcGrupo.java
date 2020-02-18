@@ -156,6 +156,7 @@ public class AbmcGrupo extends AppCompatActivity {
         Grupo grupo = new Grupo();
         grupo.setGrupoId(id);
         grupo.setGrupoNombre(nombreGrupo);
+        grupo.setGrupoAdmin(mAuth.getCurrentUser().getEmail());
         grupo.addidUsuariosInvitados(mAuth.getCurrentUser().getEmail());
         // Producto Hardcodeado //
         Producto productoHC = new Producto();

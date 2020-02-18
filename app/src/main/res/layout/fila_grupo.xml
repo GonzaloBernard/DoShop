@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_height="wrap_content"
     android:layout_margin="6dp"
     android:orientation="vertical"
     app:cardCornerRadius="4dp"
@@ -15,16 +15,17 @@
 
         <TextView
             android:id="@+id/tvGrupoNombre"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="6dp"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/bInvitarUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Invitar Usuario" />
+            android:layout_margin="6dp"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvGrupoAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:textSize="12sp" />
 
         <Button
             android:id="@+id/bVerLista"
@@ -35,28 +36,43 @@
             android:visibility="visible" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/loGrupoAdmin"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
-
-
-            <Button
-                android:id="@+id/bEditarGrupo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:text="Editar"
-                android:visibility="visible" />
+            android:layout_margin="@dimen/margin"
+            android:orientation="vertical">
 
             <Button
-                android:id="@+id/bEliminarGrupo"
-                android:layout_width="wrap_content"
+                android:id="@+id/bInvitarUsuario"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin"
-                android:text="Eliminar"
-                android:visibility="visible" />
+                android:text="Invitar Usuario" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+
+                <Button
+                    android:id="@+id/bEditarGrupo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin"
+                    android:text="Editar"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/bEliminarGrupo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/margin"
+                    android:text="Eliminar"
+                    android:visibility="visible" />
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
