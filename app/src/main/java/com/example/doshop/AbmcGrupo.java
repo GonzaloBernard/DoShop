@@ -1,5 +1,6 @@
 package com.example.doshop;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.doshop.domain.Grupo;
 import com.example.doshop.domain.Producto;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -62,15 +65,14 @@ public class AbmcGrupo extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-        final Resources resources = getResources();
+
         Bundle extras = getIntent().getExtras();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // Get usuario autentificado
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        //Usuario conectado
-        String user = currentUser.getUid();
+        String user = mAuth.getCurrentUser().getUid();
+
         // Referencia a la tabla grupos
         databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
         final Grupo grupo;
@@ -85,7 +87,7 @@ public class AbmcGrupo extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             // Insertar grupo en Firebase database
-                            String grupoId = createGrupoFirebase(etNombreGrupo.getText().toString());
+                            createGrupoFirebase(etNombreGrupo.getText().toString());
                             // Retornar a MisGrupos
                             finish();
                         }
@@ -151,7 +153,7 @@ public class AbmcGrupo extends AppCompatActivity {
 
 
     // Insertar usuario en al base de datos Firebase
-    private String createGrupoFirebase(String nombreGrupo) {
+    private void createGrupoFirebase(String nombreGrupo) {
         String id = databaseGrupos.push().getKey();
         Grupo grupo = new Grupo();
         grupo.setGrupoId(id);
@@ -169,8 +171,17 @@ public class AbmcGrupo extends AppCompatActivity {
         ArrayList<Producto> listaProductos = new ArrayList<>();
         //listaProductos.add(productoHC);
         grupo.setListaProductos(listaProductos);
-        databaseGrupos.child(id).setValue(grupo);
-        Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
-        return id;
+        databaseGrupos.child(id).setValue(grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Toast.makeText(AbmcGrupo.this, "Error al crear grupo ",Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
     }
 }
