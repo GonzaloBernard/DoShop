@@ -175,9 +175,11 @@ public class AbmcGrupo extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
+                    Log.d("ERROR :::","onCompleteListener task Successful ");
                     Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    Log.e("ERROR :::","onCompleteListener task unsuccessful ");
                     Toast.makeText(AbmcGrupo.this, "Error al crear grupo ",Toast.LENGTH_SHORT).show();
                 }
 
