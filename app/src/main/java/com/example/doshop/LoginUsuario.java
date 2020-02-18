@@ -3,6 +3,8 @@ package com.example.doshop;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +35,24 @@ public class LoginUsuario extends AppCompatActivity {
     DatabaseReference databaseUsers;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_login, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menuSignOut:
+                finish();
+                return true;
+
+            default:
+                Toast.makeText(this, ". . . . ", Toast.LENGTH_LONG).show();
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
@@ -42,7 +62,9 @@ public class LoginUsuario extends AppCompatActivity {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarLogin);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            // Se quita la flecha de regreso en el la pantalla de LogIn
+            // ---> Reempazado por  opcion de menu: Salir
+            //getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setIcon(R.mipmap.ic_launcher);
             actionBar.setTitle("Bienvenido a Do Shop");
         } catch (Exception e) {
@@ -175,7 +197,7 @@ public class LoginUsuario extends AppCompatActivity {
         return valid;
     }
 
-
+    // Se deshabilita la accion return (de la toolbar y del boton fisico del celular)
     @Override
     public void onBackPressed() {
     }
