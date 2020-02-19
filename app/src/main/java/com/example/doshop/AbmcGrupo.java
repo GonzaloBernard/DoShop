@@ -109,7 +109,6 @@ public class AbmcGrupo extends AppCompatActivity {
                 buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
                 buttonAltaGrupo.setText("Editar grupo");
                 etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
-                etNombreGrupo.setInputType(InputType.TYPE_TEXT_VARIATION_NORMAL);
                 etNombreGrupo.setText(grupo.getGrupoNombre());
                 buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                     @Override

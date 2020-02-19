@@ -201,9 +201,10 @@ public class LoginUsuario extends AppCompatActivity {
         return valid;
     }
 
-    // Se deshabilita la accion return (de la toolbar y del boton fisico del celular)
+    // No se destruye la activity
     @Override
     public void onBackPressed() {
+        moveTaskToBack(true);
     }
 
 }
