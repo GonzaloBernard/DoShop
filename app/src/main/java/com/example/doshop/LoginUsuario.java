@@ -78,7 +78,7 @@ public class LoginUsuario extends AppCompatActivity {
         databaseUsers = FirebaseDatabase.getInstance().getReference("usuarios");
 
 
-        mEmailField = (EditText) findViewById(R.id.username);
+        mEmailField = (EditText) findViewById(R.id.Email);
         mPasswordField = (EditText) findViewById(R.id.password);
         loginButton = (Button) findViewById(R.id.login);
         signinButton = (Button) findViewById(R.id.signin);
@@ -187,7 +187,7 @@ public class LoginUsuario extends AppCompatActivity {
     }
 
     // Validaciones para los datos de entrada
-    private Boolean validateForm() {
+    private boolean validateForm() {
         boolean valid = true;
         try{
             // Aca van todoss los datos de entrada

@@ -8,4 +8,8 @@
     <string name="ButtonCrearGrupo">Crear Grupo</string>
     <string name="ButtonEditarLista">Editar</string>
     <string name="ButtonVerLista">Ver</string>
+    <string name="EditTextEmailLogin">Email</string>
+    <string name="EditTextContraseñaLogin">Contraseña</string>
+    <string name="ButtonCrearUsuario"> Crear Usuario </string>
+    <string name="ButtonSignIn"> Sign in </string>
 </resources>
