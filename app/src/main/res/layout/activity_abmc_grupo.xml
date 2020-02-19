@@ -17,16 +17,18 @@
         app:titleTextColor="@color/titulo_toolbar" />
 
     <EditText
-        android:id="@+id/etNombreGrupo"
+        android:id="@+id/editTextNombreGrupo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nombre grupo"
+        android:hint="@string/EditTextNombreGrupo"
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/bAltaGrupo"
+        android:id="@+id/buttonAltaGrupo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:text="@string/ButtonCrearGrupo" />
 
 </LinearLayout>

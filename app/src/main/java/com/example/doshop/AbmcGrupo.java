@@ -79,9 +79,9 @@ public class AbmcGrupo extends AppCompatActivity {
             case GrupoAdapter._KEY_CREAR_GRUPO:
                 try {
                     // findViews
-                    buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
+                    buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
                     buttonAltaGrupo.setText("Crear grupo");
-                    etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                    etNombreGrupo = (EditText) findViewById(R.id.editTextNombreGrupo);
                     buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                         @Override
                         public void onClick(View view) {
@@ -106,9 +106,9 @@ public class AbmcGrupo extends AppCompatActivity {
             case GrupoAdapter._KEY_EDITAR_GRUPO:
                 grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
                 // findViews
-                buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
+                buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
                 buttonAltaGrupo.setText("Editar grupo");
-                etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                etNombreGrupo = (EditText) findViewById(R.id.editTextNombreGrupo);
                 etNombreGrupo.setText(grupo.getGrupoNombre());
                 buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                     @Override
@@ -125,9 +125,9 @@ public class AbmcGrupo extends AppCompatActivity {
                 // En este caso habría que buscar la forma de validar el email del usuario ingresado
                 grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
                 // findViews
-                buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
+                buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
                 buttonAltaGrupo.setText("Invitar Usuario");
-                etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
+                etNombreGrupo = (EditText) findViewById(R.id.editTextNombreGrupo);
                 // REUTILIZO EL EditText nombre del grupo
                 etNombreGrupo.setHint("Correo del usuario");
                 etNombreGrupo.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
