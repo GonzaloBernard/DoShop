@@ -6,7 +6,7 @@
         android:title="Crear grupo"
         android:orderInCategory="1" app:showAsAction="never"></item>
     <item android:id="@+id/menuSignOut"
-        android:title="Salir"
+        android:title="Cerrar sesión"
         android:orderInCategory="2" app:showAsAction="never"></item>
 
 

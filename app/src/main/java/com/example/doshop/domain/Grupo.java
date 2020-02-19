@@ -9,6 +9,7 @@ import java.util.List;
 public class Grupo implements Parcelable {
     private String grupoId;
     private String grupoNombre;
+    private String grupoAdmin;
     private List<Producto> listaProductos;
     private List<String> idUsuariosInvitados = new ArrayList<>();
 
@@ -35,18 +36,26 @@ public class Grupo implements Parcelable {
     }
     public String getGrupoNombre(){return grupoNombre; }
 
+    public void setGrupoAdmin(String grupoAdmin) {
+        this.grupoAdmin = grupoAdmin;
+    }
+    public String getGrupoAdmin() {
+        return grupoAdmin;
+    }
+
     public List<Producto> getListaProductos() {
         return listaProductos;
     }
-
     public void setListaProductos(List<Producto> listaProductos) {
         this.listaProductos = listaProductos;
+    }
+    public void addListaProductos(Producto productoId){
+        this.listaProductos.add(productoId);
     }
 
     public List<String> getidUsuariosInvitados() {
         return idUsuariosInvitados;
     }
-
     public void setidUsuariosInvitados(List<String> idUsuariosInvitados) {
         this.idUsuariosInvitados = idUsuariosInvitados;
     }
@@ -63,6 +72,7 @@ public class Grupo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(grupoId);
         dest.writeString(grupoNombre);
+        dest.writeString(grupoAdmin);
         dest.writeList(listaProductos);
         dest.writeList(idUsuariosInvitados);
     }
@@ -70,6 +80,7 @@ public class Grupo implements Parcelable {
     private void readFromParcel(Parcel in) {
         this.grupoId = in.readString();
         this.grupoNombre = in.readString();
+        this.grupoAdmin = in.readString();
         in.readList(this.listaProductos, this.getClass().getClassLoader());
         in.readList(this.idUsuariosInvitados, this.getClass().getClassLoader());
     }

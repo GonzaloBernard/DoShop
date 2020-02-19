@@ -7,6 +7,15 @@
     android:orientation="vertical"
     tools:context=".AbmcGrupo">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tbAbmcGrupo"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/Theme.AppCompat.Light"
+        app:titleTextColor="@color/titulo_toolbar" />
+
     <EditText
         android:id="@+id/etNombreGrupo"
         android:layout_width="match_parent"

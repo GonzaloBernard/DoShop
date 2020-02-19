@@ -9,11 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.doshop.domain.Grupo;
-import com.example.doshop.domain.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -47,6 +48,17 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
     public void onBindViewHolder(final GrupoHolder holder, final int position) {
         final Grupo grupo = mDataset.get(position);
         holder.tvGrupoNombre.setText(grupo.getGrupoNombre());
+        holder.tvGrupoAdmin.setText("Admin: " + grupo.getGrupoAdmin());
+
+        // Corroborar si se es admin de un grupo para agregar
+        // la gestión de grupo
+
+        if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(grupo.getGrupoAdmin())){
+            holder.loGrupoAdmin.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.loGrupoAdmin.setVisibility(View.GONE);
+        }
 
 
         ///////////////////////////////
@@ -148,18 +160,22 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
     public class GrupoHolder extends RecyclerView.ViewHolder {
 
         TextView tvGrupoNombre;
+        TextView tvGrupoAdmin;
         Button bEditarGrupo;
         Button bEliminarGrupo;
         Button bVerLista;
         Button bInvitarUsuario;
+        LinearLayout loGrupoAdmin;
 
         public GrupoHolder(View base) {
             super(base);
             this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
+            this.tvGrupoAdmin = (TextView) base.findViewById(R.id.tvGrupoAdmin);
             this.bEditarGrupo = (Button) base.findViewById(R.id.bEditarGrupo);
             this.bEliminarGrupo = (Button) base.findViewById(R.id.bEliminarGrupo);
             this.bVerLista = (Button) base.findViewById(R.id.bVerLista);
             this.bInvitarUsuario = (Button) base.findViewById(R.id.bInvitarUsuario);
+            this.loGrupoAdmin = (LinearLayout) base.findViewById(R.id.loGrupoAdmin);
 
         }
     }
