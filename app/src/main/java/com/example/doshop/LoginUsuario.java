@@ -1,5 +1,6 @@
 package com.example.doshop;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -65,8 +66,12 @@ public class LoginUsuario extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                if (mEmailField.getText().toString().isEmpty() || mPasswordField.getText().toString().isEmpty()) {
+                    Toast.makeText(LoginUsuario.this, "Debe completar ambos campos", Toast.LENGTH_LONG).show();
 
-                createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                } else {
+                    createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
+                }
             }
 
         });
@@ -74,8 +79,7 @@ public class LoginUsuario extends AppCompatActivity {
         signinButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-
+            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
             }
         });
 

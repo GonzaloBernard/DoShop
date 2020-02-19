@@ -87,6 +87,8 @@ public class MisGrupos extends AppCompatActivity {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMisGrupos);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
+            getSupportActionBar().setDisplayShowHomeEnabled(true);
+            getSupportActionBar().setIcon(R.mipmap.ic_launcher);
             actionBar.setTitle(currentUser.getEmail());
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
