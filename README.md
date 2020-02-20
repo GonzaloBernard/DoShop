@@ -9,6 +9,5 @@ Autores:
 # Herramientas utilizadas
 
  - Jira para gestionar el proyecto https://gonzalobernard.atlassian.net/
- - Firebase:
-          - Authentication para gestionar usuarios
-          - Realtime Database para persistir datos https://doshop-18ada.firebaseio.com/
+ - Firebase Authentication para gestionar usuarios
+ - Firebase Realtime Database para persistir datos https://doshop-18ada.firebaseio.com/
