@@ -66,7 +66,7 @@ public class LoginUsuario extends AppCompatActivity {
             // ---> Reempazado por  opcion de menu: Salir
             //getSupportActionBar().setDisplayShowHomeEnabled(true);
             getSupportActionBar().setIcon(R.mipmap.ic_launcher);
-            actionBar.setTitle("Bienvenido a Do Shop");
+            actionBar.setTitle("DoShop");
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }

@@ -196,10 +196,10 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
             super(base);
             this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
             this.tvGrupoAdmin = (TextView) base.findViewById(R.id.tvGrupoAdmin);
-            this.bEditarGrupo = (Button) base.findViewById(R.id.bEditarGrupo);
-            this.bEliminarGrupo = (Button) base.findViewById(R.id.bEliminarGrupo);
-            this.bVerLista = (Button) base.findViewById(R.id.bVerLista);
-            this.bInvitarUsuario = (Button) base.findViewById(R.id.bInvitarUsuario);
+            this.bEditarGrupo = (Button) base.findViewById(R.id.buttonEditarGrupo);
+            this.bEliminarGrupo = (Button) base.findViewById(R.id.buttonEliminarGrupo);
+            this.bVerLista = (Button) base.findViewById(R.id.buttonVerLista);
+            this.bInvitarUsuario = (Button) base.findViewById(R.id.buttonInvitarUsuario);
             this.bAgregarEvento = (Button) base.findViewById(R.id.bAgregarEvento);
             this.loGrupoAdmin = (LinearLayout) base.findViewById(R.id.loGrupoAdmin);
 
