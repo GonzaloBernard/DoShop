@@ -1,10 +1,5 @@
 package com.example.doshop;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
@@ -15,6 +10,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.example.doshop.domain.Evento;
 import com.example.doshop.domain.Grupo;
 import com.example.doshop.domain.Producto;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -23,17 +24,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
-public class AbmcGrupo extends AppCompatActivity {
+public class AbmcEvento extends AppCompatActivity {
 
     DatabaseReference databaseGrupos;
-    private Button buttonAltaGrupo;
-    private EditText etNombreGrupo;
     private FirebaseAuth mAuth;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_abmc_grupo, menu);
+        getMenuInflater().inflate(R.menu.menu_abmc_evento, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -51,20 +49,18 @@ public class AbmcGrupo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_abmc_grupo);
+        setContentView(R.layout.activity_abmc_evento);
 
         //TOOLBAR
         try {
-            Toolbar toolbar = (Toolbar) findViewById(R.id.tbAbmcGrupo);
+            Toolbar toolbar = (Toolbar) findViewById(R.id.tbAbmcEvento);
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle( "GESTIONAR GRUPO" );
+            actionBar.setTitle( "GESTIONAR EVENTO" );
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
-        Bundle extras = getIntent().getExtras();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -73,36 +69,59 @@ public class AbmcGrupo extends AppCompatActivity {
 
         // Referencia a la tabla grupos
         databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
-        final Grupo grupo;
+        final Evento evento;
+
+        Bundle extras = getIntent().getExtras();
+        Grupo grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
+
         switch (extras.getInt(GrupoAdapter._ABMC_GRUPO_MODO_KEY)) {
-            case GrupoAdapter._KEY_CREAR_GRUPO:
-                try {
-                    // findViews
-                    buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
-                    buttonAltaGrupo.setText("Crear grupo");
-                    etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
-                    buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            // Insertar grupo en Firebase database
-                            createGrupoFirebase(etNombreGrupo.getText().toString());
-                            // Retornar a MisGrupos
-                            finish();
+            case GrupoAdapter._KEY_CREAR_EVENTO:
+/*
+                // EVENTO HARDCODEADO //
+                evento = new Evento();
+                evento.setEventoId("1");
+                evento.setEventoNombre("Nombre evento HC");
+                evento.setEventoDescripcion("Descripcion evento HC");
+
+                databaseGrupos.child(id).setValue(grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()){
+                            Log.d("ERROR :::","onCompleteListener task Successful ");
+                            Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
                         }
-                    });
+                        else {
+                            Log.e("ERROR :::","onCompleteListener task unsuccessful ");
+                            Toast.makeText(AbmcGrupo.this, "Error al crear grupo ",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                });*/
+                /*
+                try {
+
+                    // Insertar grupo en Firebase database
+                    createGrupoFirebase(etNombreGrupo.getText().toString());
+                    // Retornar a MisGrupos
+                    finish();
+
                 }
                 catch (Exception e){
-                    Toast.makeText(AbmcGrupo.this, "Error !!!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AbmcEvento.this, "Error !!!",Toast.LENGTH_SHORT).show();
                     Log.e("Error ::::: ",e.getMessage());
                 }
+                */
                 break;
-            case GrupoAdapter._KEY_BORRAR_GRUPO:
+            case GrupoAdapter._KEY_BORRAR_EVENTO:
+                /*
                 String grupoIdBorrar = extras.getString(GrupoAdapter._GRUPO_KEY);
                 //ELIMINAR EL GRUPO DE FIREBASE DATABASE
                 databaseGrupos.child(grupoIdBorrar).removeValue();
                 finish();
+                */
                 break;
-            case GrupoAdapter._KEY_EDITAR_GRUPO:
+            case GrupoAdapter._KEY_EDITAR_EVENTO:
+                /*
                 grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
                 // findViews
                 buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
@@ -117,40 +136,14 @@ public class AbmcGrupo extends AppCompatActivity {
                         finish();
                     }
                 });
-
-                break;
-            case GrupoAdapter._KEY_INVITAR_USUARIO:
-                //  AGREGAR UN MIEMBRO A UN GRUPO
-                // En este caso habría que buscar la forma de validar el email del usuario ingresado
-                grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
-                // findViews
-                buttonAltaGrupo = (Button) findViewById(R.id.bAltaGrupo);
-                buttonAltaGrupo.setText("Invitar Usuario");
-                etNombreGrupo = (EditText) findViewById(R.id.etNombreGrupo);
-                // REUTILIZO EL EditText nombre del grupo
-                etNombreGrupo.setHint("Correo del usuario");
-                etNombreGrupo.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-
-
-                buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        ////////////////////////////////////////////////////////////
-                        //  FALTA VALIDAR QUE EL EMAIL EXISTA EN BASE DE DATOS!!! //
-                        ////////////////////////////////////////////////////////////
-                        grupo.addUsuarioInvitado(etNombreGrupo.getText().toString());
-                        databaseGrupos.child(grupo.getGrupoId()).setValue(grupo);
-                        finish();
-                    }
-                });
-
+                */
                 break;
         }
 
     }
 
 
-
+/*
     // Insertar usuario en al base de datos Firebase
     private void createGrupoFirebase(String nombreGrupo) {
         String id = databaseGrupos.push().getKey();
@@ -160,8 +153,20 @@ public class AbmcGrupo extends AppCompatActivity {
         grupo.setGrupoAdmin(mAuth.getCurrentUser().getEmail());
         grupo.addUsuarioInvitado(mAuth.getCurrentUser().getEmail());
 
+        // Producto Hardcodeado //
+        Producto productoHC = new Producto();
+        productoHC.setProductoId("1");
+        productoHC.setProductoNombre("Producto Hardcodeado");
+        productoHC.setProductoDescripcion("Descripcion HardCodeada");
+        // Producto Hardcodeado //
 
+        // Evento Hardcodeado //
+        Evento eventoHC = new Evento();
+        eventoHC.addElemento(productoHC);
+        eventoHC.setEventoId("1");
+        eventoHC.setEventoNombre("Evento asdasd");
 
+        grupo.addEvento(eventoHC);
 
         databaseGrupos.child(id).setValue(grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -177,5 +182,5 @@ public class AbmcGrupo extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 }

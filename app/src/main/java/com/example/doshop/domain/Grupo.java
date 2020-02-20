@@ -10,8 +10,8 @@ public class Grupo implements Parcelable {
     private String grupoId;
     private String grupoNombre;
     private String grupoAdmin;
-    private List<Producto> listaProductos;
-    private List<String> idUsuariosInvitados = new ArrayList<>();
+    private List<Evento> listaEventos = new ArrayList<>();
+    private List<String> usuariosInvitados = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
@@ -26,41 +26,52 @@ public class Grupo implements Parcelable {
         readFromParcel(in);
     }
 
-    public void setGrupoId(String grupoId){
+    public String getGrupoId() {
+        return grupoId;
+    }
+
+    public void setGrupoId(String grupoId) {
         this.grupoId = grupoId;
     }
-    public String getGrupoId(){return grupoId; }
 
-    public void setGrupoNombre(String grupoNombre){
+    public String getGrupoNombre() {
+        return grupoNombre;
+    }
+
+    public void setGrupoNombre(String grupoNombre) {
         this.grupoNombre = grupoNombre;
     }
-    public String getGrupoNombre(){return grupoNombre; }
 
-    public void setGrupoAdmin(String grupoAdmin) {
-        this.grupoAdmin = grupoAdmin;
-    }
     public String getGrupoAdmin() {
         return grupoAdmin;
     }
 
-    public List<Producto> getListaProductos() {
-        return listaProductos;
-    }
-    public void setListaProductos(List<Producto> listaProductos) {
-        this.listaProductos = listaProductos;
-    }
-    public void addListaProductos(Producto productoId){
-        this.listaProductos.add(productoId);
+    public void setGrupoAdmin(String grupoAdmin) {
+        this.grupoAdmin = grupoAdmin;
     }
 
-    public List<String> getidUsuariosInvitados() {
-        return idUsuariosInvitados;
+    public List<Evento> getListaEventos() {
+        return listaEventos;
     }
-    public void setidUsuariosInvitados(List<String> idUsuariosInvitados) {
-        this.idUsuariosInvitados = idUsuariosInvitados;
+
+    public void setListaEventos(List<Evento> listaEventos) {
+        this.listaEventos = listaEventos;
     }
-    public void addidUsuariosInvitados(String usuarioInvitadoId){
-        this.idUsuariosInvitados.add(usuarioInvitadoId);
+
+    public void addEvento(Evento evento){
+        this.listaEventos.add(evento);
+    }
+
+    public List<String> getUsuariosInvitados() {
+        return usuariosInvitados;
+    }
+
+    public void setUsuariosInvitados(List<String> usuariosInvitados) {
+        this.usuariosInvitados = usuariosInvitados;
+    }
+
+    public void addUsuarioInvitado(String usuarioInvitadoId){
+        this.usuariosInvitados.add(usuarioInvitadoId);
     }
 
     @Override
@@ -73,16 +84,16 @@ public class Grupo implements Parcelable {
         dest.writeString(grupoId);
         dest.writeString(grupoNombre);
         dest.writeString(grupoAdmin);
-        dest.writeList(listaProductos);
-        dest.writeList(idUsuariosInvitados);
+        dest.writeList(listaEventos);
+        dest.writeList(usuariosInvitados);
     }
 
     private void readFromParcel(Parcel in) {
         this.grupoId = in.readString();
         this.grupoNombre = in.readString();
         this.grupoAdmin = in.readString();
-        in.readList(this.listaProductos, this.getClass().getClassLoader());
-        in.readList(this.idUsuariosInvitados, this.getClass().getClassLoader());
+        in.readList(this.listaEventos, this.getClass().getClassLoader());
+        in.readList(this.usuariosInvitados, this.getClass().getClassLoader());
     }
 
     public static final Parcelable.Creator<Grupo> CREATOR = new Parcelable.Creator<Grupo>() {

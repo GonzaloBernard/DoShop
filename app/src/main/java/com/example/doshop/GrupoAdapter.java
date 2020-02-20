@@ -28,6 +28,11 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
     public static final int _KEY_INVITAR_USUARIO = 4;
     public static final String _GRUPO_KEY = "_GRUPO_KEY";
 
+    public static final String _ABMC_EVENTO_MODO_KEY = "_ABMC_EVENTO_MODO_KEY";
+    public static final int _KEY_CREAR_EVENTO = 10;
+    public static final int _KEY_BORRAR_EVENTO = 20;
+    public static final int _KEY_EDITAR_EVENTO = 30;
+
     public GrupoAdapter(List<Grupo> myDataset) {
         this.mDataset = myDataset;
     }
@@ -155,6 +160,25 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
 
             }
         });
+        ///////////////////////////////////////
+        //CLICK EN BOTON AGREGAR EVENTO  //////
+        ///////////////////////////////////////
+        holder.bAgregarEvento.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                /*
+                Intent intent = new Intent(context, AbmcGrupo.class);
+                //EL MODO DETERMINA LA ACCION A REALIZAR
+                intent.putExtra(_ABMC_EVENTO_MODO_KEY, _KEY_CREAR_EVENTO );
+                //SE EDITA EL GRUPO
+                intent.putExtra(_GRUPO_KEY, grupo );
+                ((Activity) context).startActivity(intent);
+
+                 */
+
+            }
+        });
 
     }
     public class GrupoHolder extends RecyclerView.ViewHolder {
@@ -165,6 +189,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         Button bEliminarGrupo;
         Button bVerLista;
         Button bInvitarUsuario;
+        Button bAgregarEvento;
         LinearLayout loGrupoAdmin;
 
         public GrupoHolder(View base) {
@@ -175,6 +200,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
             this.bEliminarGrupo = (Button) base.findViewById(R.id.bEliminarGrupo);
             this.bVerLista = (Button) base.findViewById(R.id.bVerLista);
             this.bInvitarUsuario = (Button) base.findViewById(R.id.bInvitarUsuario);
+            this.bAgregarEvento = (Button) base.findViewById(R.id.bAgregarEvento);
             this.loGrupoAdmin = (LinearLayout) base.findViewById(R.id.loGrupoAdmin);
 
         }

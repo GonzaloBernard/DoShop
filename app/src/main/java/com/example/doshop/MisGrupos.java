@@ -3,11 +3,8 @@ package com.example.doshop;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -121,7 +118,7 @@ public class MisGrupos extends AppCompatActivity {
                         Grupo grupo = data.getValue(Grupo.class);
 
                         // CORROBORAR QUE EL USUARIO ES MIEMBRO DEL GRUPO
-                        if(grupo.getidUsuariosInvitados().contains(usuario)){
+                        if(grupo.getUsuariosInvitados().contains(usuario)){
                             listaDataSet.add(grupo);
                         }
                         // MUESTRA TODOS LOS GRUPOS

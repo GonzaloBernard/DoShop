@@ -9,6 +9,9 @@ public class Producto implements Parcelable {
     private String productoId;
     private String productoNombre;
     private String productoDescripcion;
+    private Float productoPrecio;
+
+
 
     public Producto(){}
     public Producto(Parcel in){
@@ -39,6 +42,13 @@ public class Producto implements Parcelable {
         this.productoDescripcion = productoDescripcion;
     }
 
+    public Float getProductoPrecio() {
+        return productoPrecio;
+    }
+
+    public void setProductoPrecio(Float productoPrecio) {
+        this.productoPrecio = productoPrecio;
+    }
 
     @Override
     public int describeContents() {
@@ -50,12 +60,14 @@ public class Producto implements Parcelable {
         dest.writeString(productoId);
         dest.writeString(productoNombre);
         dest.writeString(productoDescripcion);
+        //dest.writeFloat(productoPrecio);
     }
 
     private void readFromParcel(Parcel in) {
         this.productoId = in.readString();
         this.productoNombre = in.readString();
         this.productoDescripcion = in.readString();
+        //this.productoPrecio = in.readFloat();
     }
 
     public static final Parcelable.Creator<Producto> CREATOR = new Parcelable.Creator<Producto>() {
