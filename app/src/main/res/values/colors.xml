@@ -2,7 +2,7 @@
 <resources>
     <color name="colorPrimary">#ED2B39BE</color>
     <color name="colorPrimaryDark">#000483</color>
-    <color name="colorAccent">#C72727</color>
+    <color name="colorAccent">#2196F3</color>
     <color name="titulo_toolbar">#FFFFFF</color>
     <color name="ic_launcher_background">#1C61A6</color>
 </resources>

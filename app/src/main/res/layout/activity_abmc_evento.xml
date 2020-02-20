@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".AbmcGrupo">
+    tools:context=".AbmcEvento">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tbAbmcGrupo"
+        android:id="@+id/tbAbmcEvento"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
@@ -16,20 +16,5 @@
         android:theme="@style/Theme.AppCompat.Light"
         app:titleTextColor="@color/titulo_toolbar" />
 
-    <EditText
-        android:id="@+id/editTextNombreGrupo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/EditTextNombreGrupo"
-        android:inputType="textPersonName" />
-
-    <Button
-        android:id="@+id/buttonAltaGrupo"
-        style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="true"
-        android:text="@string/ButtonCrearGrupo" />
 
 </LinearLayout>

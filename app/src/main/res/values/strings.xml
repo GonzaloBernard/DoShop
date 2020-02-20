@@ -7,5 +7,14 @@
     <string name="ButtonBorrarGrupo">Borrar</string>
     <string name="ButtonCrearGrupo">Crear Grupo</string>
     <string name="ButtonEditarLista">Editar</string>
-    <string name="ButtonVerLista">Ver</string>
+    <string name="ButtonVerLista">VER LISTA</string>
+    <string name="EditTextEmailLogin">Email</string>
+    <string name="EditTextContraseñaLogin">Contraseña</string>
+    <string name="ButtonCrearUsuario"> Crear Usuario </string>
+    <string name="ButtonSignIn"> Sign in </string>
+    <string name="ButtonInvitarUsuarios">Invitar Usuario</string>
+    <string name="ButtonEditarGrupo">Editar</string>
+    <string name="ButtonELiminarGrupo">Eliminar</string>
+    <string name="EditTextNombreGrupo">Nombre grupo</string>
+    <string name="Salir">Salir</string>
 </resources>

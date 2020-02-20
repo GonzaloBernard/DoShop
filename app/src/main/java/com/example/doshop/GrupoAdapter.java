@@ -9,11 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.doshop.domain.Grupo;
-import com.example.doshop.domain.Usuario;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.List;
 
@@ -26,6 +27,11 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
     public static final int _KEY_EDITAR_GRUPO = 3;
     public static final int _KEY_INVITAR_USUARIO = 4;
     public static final String _GRUPO_KEY = "_GRUPO_KEY";
+
+    public static final String _ABMC_EVENTO_MODO_KEY = "_ABMC_EVENTO_MODO_KEY";
+    public static final int _KEY_CREAR_EVENTO = 10;
+    public static final int _KEY_BORRAR_EVENTO = 20;
+    public static final int _KEY_EDITAR_EVENTO = 30;
 
     public GrupoAdapter(List<Grupo> myDataset) {
         this.mDataset = myDataset;
@@ -47,6 +53,17 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
     public void onBindViewHolder(final GrupoHolder holder, final int position) {
         final Grupo grupo = mDataset.get(position);
         holder.tvGrupoNombre.setText(grupo.getGrupoNombre());
+        holder.tvGrupoAdmin.setText("Admin: " + grupo.getGrupoAdmin());
+
+        // Corroborar si se es admin de un grupo para agregar
+        // la gestión de grupo
+
+        if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(grupo.getGrupoAdmin())){
+            holder.loGrupoAdmin.setVisibility(View.VISIBLE);
+        }
+        else {
+            holder.loGrupoAdmin.setVisibility(View.GONE);
+        }
 
 
         ///////////////////////////////
@@ -143,23 +160,48 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
 
             }
         });
+        ///////////////////////////////////////
+        //CLICK EN BOTON AGREGAR EVENTO  //////
+        ///////////////////////////////////////
+        holder.bAgregarEvento.setOnClickListener(new Button.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+
+                /*
+                Intent intent = new Intent(context, AbmcGrupo.class);
+                //EL MODO DETERMINA LA ACCION A REALIZAR
+                intent.putExtra(_ABMC_EVENTO_MODO_KEY, _KEY_CREAR_EVENTO );
+                //SE EDITA EL GRUPO
+                intent.putExtra(_GRUPO_KEY, grupo );
+                ((Activity) context).startActivity(intent);
+
+                 */
+
+            }
+        });
 
     }
     public class GrupoHolder extends RecyclerView.ViewHolder {
 
         TextView tvGrupoNombre;
+        TextView tvGrupoAdmin;
         Button bEditarGrupo;
         Button bEliminarGrupo;
         Button bVerLista;
         Button bInvitarUsuario;
+        Button bAgregarEvento;
+        LinearLayout loGrupoAdmin;
 
         public GrupoHolder(View base) {
             super(base);
             this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
-            this.bEditarGrupo = (Button) base.findViewById(R.id.bEditarGrupo);
-            this.bEliminarGrupo = (Button) base.findViewById(R.id.bEliminarGrupo);
-            this.bVerLista = (Button) base.findViewById(R.id.bVerLista);
-            this.bInvitarUsuario = (Button) base.findViewById(R.id.bInvitarUsuario);
+            this.tvGrupoAdmin = (TextView) base.findViewById(R.id.tvGrupoAdmin);
+            this.bEditarGrupo = (Button) base.findViewById(R.id.buttonEditarGrupo);
+            this.bEliminarGrupo = (Button) base.findViewById(R.id.buttonEliminarGrupo);
+            this.bVerLista = (Button) base.findViewById(R.id.buttonVerLista);
+            this.bInvitarUsuario = (Button) base.findViewById(R.id.buttonInvitarUsuario);
+            this.bAgregarEvento = (Button) base.findViewById(R.id.bAgregarEvento);
+            this.loGrupoAdmin = (LinearLayout) base.findViewById(R.id.loGrupoAdmin);
 
         }
     }
