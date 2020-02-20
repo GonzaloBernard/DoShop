@@ -14,8 +14,9 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/Theme.AppCompat.Light"
-        app:titleTextColor="@color/titulo_toolbar" />
+        android:theme="@style/AppTheme.ActionBar"
+        app:titleTextColor="@color/titulo_toolbar"
+        app:titleTextAppearance="@style/Toolbar.TitleText"/>
 
     <LinearLayout
     android:orientation="horizontal"
@@ -60,6 +61,7 @@
 
         <Button
             android:id="@+id/login"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -68,7 +70,7 @@
 
         <Button
             android:id="@+id/signin"
-            style="@style/Widget.AppCompat.Button"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

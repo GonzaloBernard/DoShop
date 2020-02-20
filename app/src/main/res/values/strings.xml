@@ -16,4 +16,5 @@
     <string name="ButtonEditarGrupo">Editar</string>
     <string name="ButtonELiminarGrupo">Eliminar</string>
     <string name="EditTextNombreGrupo">Nombre grupo</string>
+    <string name="Salir">Salir</string>
 </resources>
