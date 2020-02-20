@@ -1,13 +1,7 @@
 package com.example.doshop;
 
-
-import android.content.Context;
-import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.doshop.domain.Grupo;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -16,7 +10,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 
 public class GruposDatabase {
 
@@ -29,7 +22,7 @@ public class GruposDatabase {
         }
         return _GRUPOS_DATABASE;
     }
-    public void insertGrupo(Grupo grupo){
+    public void insertarGrupo(Grupo grupo){
         // Get usuario autentificado
         String usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
         // Abrir conexion con la base de datos
@@ -46,4 +39,24 @@ public class GruposDatabase {
             }
         });
     }
+    public void borrarGrupo(String grupo){
+        // Get usuario autentificado
+        String usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        // Abrir conexion con la base de datos
+        DatabaseReference databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(usuarioId);
+        databaseGrupos.child(grupo).removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Log.d("ERROR :::","onCompleteListener task Successful ");
+                }
+                else {
+                    Log.e("ERROR :::","onCompleteListener task unsuccessful ");
+                }
+            }
+        });
+    }
+
+
+
 }
