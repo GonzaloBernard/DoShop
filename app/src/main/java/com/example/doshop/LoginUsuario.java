@@ -83,6 +83,7 @@ public class LoginUsuario extends AppCompatActivity {
         loginButton = (Button) findViewById(R.id.login);
         signinButton = (Button) findViewById(R.id.signin);
 
+
         loginButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -106,8 +107,8 @@ public class LoginUsuario extends AppCompatActivity {
     private void createAccount(final String email, String password) {
 
         // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        Task<AuthResult> mAuthTask = mAuth.createUserWithEmailAndPassword(email, password);
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
@@ -198,10 +199,10 @@ public class LoginUsuario extends AppCompatActivity {
         int passw = mPasswordField.getText().toString().length();
         try{
             // Aca van todoss los datos de entrada
-            if (correo.length()<6 || correo.length() > 60) mEmailField.setError("No se corresponde a un correo válido");
-            if (passw < 6) mPasswordField.setError("La contraseña es incorrecta");
-            //if (mEmailField.getText().toString().length()<6) throw new Exception("Invalid Email");
-            //if (mPasswordField.getText().toString().length()<6) throw new Exception("Invalid Password");
+            //if (correo.length()<6 || correo.length() > 60) mEmailField.setError("No se corresponde a un correo válido");
+            //if (passw < 6) mPasswordField.setError("La contraseña es incorrecta");
+            if (correo.length()<6 || correo.length() > 60) throw new Exception("Invalid Email");
+            if (passw <6) throw new Exception("Invalid Password");
         }
         catch (Exception e){
             valid=false;
