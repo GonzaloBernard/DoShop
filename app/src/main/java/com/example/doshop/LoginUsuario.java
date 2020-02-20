@@ -39,13 +39,13 @@ public class LoginUsuario extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_login, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menuSignOut:
                 finish();
                 return true;
-
             default:
                 Toast.makeText(this, ". . . . ", Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);
@@ -123,8 +123,7 @@ public class LoginUsuario extends AppCompatActivity {
                             }
                             catch (Exception e){
                                 Log.w(TAG, e.getMessage(), task.getException());
-                                Toast.makeText(LoginUsuario.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginUsuario.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             // If sign in fails, display a message to the user.
@@ -186,13 +185,23 @@ public class LoginUsuario extends AppCompatActivity {
 
     }
 
+    public void handlerErrors(Error error){
+
+
+    }
+
+
     // Validaciones para los datos de entrada
     private boolean validateForm() {
         boolean valid = true;
+        String correo = mEmailField.getText().toString();
+        int passw = mPasswordField.getText().toString().length();
         try{
             // Aca van todoss los datos de entrada
-            if (mEmailField.getText().toString().length()<6) throw new Exception("Invalid Email");
-            if (mPasswordField.getText().toString().length()<6) throw new Exception("Invalid Password");
+            if (correo.length()<6 || correo.length() > 60) mEmailField.setError("No se corresponde a un correo válido");
+            if (passw < 6) mPasswordField.setError("La contraseña es incorrecta");
+            //if (mEmailField.getText().toString().length()<6) throw new Exception("Invalid Email");
+            //if (mPasswordField.getText().toString().length()<6) throw new Exception("Invalid Password");
         }
         catch (Exception e){
             valid=false;
@@ -206,5 +215,6 @@ public class LoginUsuario extends AppCompatActivity {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
+
 
 }
