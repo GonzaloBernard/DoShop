@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
@@ -167,7 +166,7 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
             super(base);
             this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
             this.tvGrupoAdmin = (TextView) base.findViewById(R.id.tvGrupoAdmin);
-            this.bVerLista = (Button) base.findViewById(R.id.buttonVerLista);
+            this.bVerLista = (Button) base.findViewById(R.id.buttonVerEventos);
             this.bFilaGrupoMenu = (Button) base.findViewById(R.id.bFilaGrupoMenu);
 
         }
