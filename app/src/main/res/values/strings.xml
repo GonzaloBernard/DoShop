@@ -23,5 +23,6 @@
     <string name="ButtonSelecimagenProducto">BtnselImgProduct</string>
     <string name="ButtonCrearEvento">Crear Evento</string>
     <string name="EditTextNombreEvento">Nombre del evento</string>
+    <string name="ButtonCerrarSesion">Cerrar sesión</string>
 
 </resources>

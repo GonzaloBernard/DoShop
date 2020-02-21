@@ -14,6 +14,8 @@
 
     <style name="AppTheme.ActionBar" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="actionMenuTextColor">@color/titulo_toolbar</item>
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="colorControlNormal">@color/titulo_toolbar</item>
+
     </style>
 </resources>

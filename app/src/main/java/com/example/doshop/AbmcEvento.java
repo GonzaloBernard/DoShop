@@ -63,7 +63,7 @@ public class AbmcEvento extends AppCompatActivity {
         // FINDVIEWS
         etEventoNombre = (EditText) findViewById(R.id.editTextEventoNombre);
         bEventoCrear = (Button) findViewById(R.id.bEventoCrear);
-        sEventoTipo = (Spinner) findViewById(R.id.sEventoTipo);
+        sEventoTipo = (Spinner) findViewById(R.id.spinnerEventoTipo);
         sEventoPrioridad = (Spinner) findViewById(R.id.sEventoPrioridad);
 
         switch (extras.getInt(GrupoAdapter._ABMC_EVENTO_MODO_KEY)) {

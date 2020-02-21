@@ -6,7 +6,7 @@
         android:title="@string/ButtonCrearGrupo"
         android:orderInCategory="1" app:showAsAction="never"></item>
     <item android:id="@+id/menuSignOut"
-        android:title="Cerrar sesión"
+        android:title="@string/ButtonCerrarSesion"
         android:orderInCategory="2" app:showAsAction="never"></item>
 
 

@@ -10,7 +10,7 @@
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/Theme.AppCompat.Light"
+        android:theme="@style/AppTheme.ActionBar"
         app:titleTextColor="@color/titulo_toolbar" />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/GruposRecyclerView"

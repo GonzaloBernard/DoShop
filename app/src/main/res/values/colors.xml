@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#ED2B39BE</color>
-    <color name="colorPrimaryDark">#000483</color>
+    <color name="colorPrimary">#027CDA</color>
+    <color name="colorPrimaryDark">#040AC2</color>
     <color name="colorAccent">#2196F3</color>
     <color name="titulo_toolbar">#FFFFFF</color>
     <color name="ic_launcher_background">#1C61A6</color>
