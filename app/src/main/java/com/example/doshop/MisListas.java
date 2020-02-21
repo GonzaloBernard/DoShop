@@ -1,10 +1,8 @@
 package com.example.doshop;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
@@ -52,7 +50,7 @@ public class MisListas extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mis_listas);
+        setContentView(R.layout.activity_mis_eventos);
 
         //TOOLBAR
         try {

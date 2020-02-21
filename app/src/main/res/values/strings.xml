@@ -17,4 +17,8 @@
     <string name="ButtonELiminarGrupo">Eliminar</string>
     <string name="EditTextNombreGrupo">Nombre grupo</string>
     <string name="Salir">Salir</string>
+    <string name="EditTextNombreProducto">Nombre</string>
+    <string name="EditTextPrecioProducto">Precio</string>
+    <string name="EditTextDescripciónProducto">Descripción</string>
+    <string name="ButtonSelecimagenProducto">BtnselImgProduct</string>
 </resources>
