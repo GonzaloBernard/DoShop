@@ -1,12 +1,11 @@
 package com.example.doshop;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,21 +14,16 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.doshop.repository.GruposDatabase;
 import com.example.doshop.domain.Grupo;
-import com.example.doshop.domain.Producto;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class AbmcGrupo extends AppCompatActivity {
-
-    DatabaseReference databaseGrupos;
     private Button buttonAltaGrupo;
+    private Button bInvitarUsuario;
     private EditText etNombreGrupo;
-    private FirebaseAuth mAuth;
+    private EditText etInvitarUsuario;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,27 +60,34 @@ public class AbmcGrupo extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-        // Get usuario autentificado
-        String user = mAuth.getCurrentUser().getUid();
+        // findViews
+        buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
+        etNombreGrupo = (EditText) findViewById(R.id.editTextNombreGrupo);
+        bInvitarUsuario = (Button) findViewById(R.id.bInvitarUsuario);
+        etInvitarUsuario = (EditText) findViewById(R.id.etInvitarUsuario);
 
-        // Referencia a la tabla grupos
-        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
         final Grupo grupo;
         switch (extras.getInt(GrupoAdapter._ABMC_GRUPO_MODO_KEY)) {
+
             case GrupoAdapter._KEY_CREAR_GRUPO:
+                etInvitarUsuario.setVisibility(View.GONE);
+                bInvitarUsuario.setVisibility(View.GONE);
+                etNombreGrupo.setVisibility(View.VISIBLE);
+                buttonAltaGrupo.setVisibility(View.VISIBLE);
                 try {
-                    // findViews
-                    buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
                     buttonAltaGrupo.setText("Crear grupo");
-                    etNombreGrupo = (EditText) findViewById(R.id.editTextNombreGrupo);
                     buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            // Insertar grupo en Firebase database
-                            createGrupoFirebase(etNombreGrupo.getText().toString());
-                            // Retornar a MisGrupos
+
+                            Grupo grupo = new Grupo();
+                            grupo.setGrupoId("");
+                            grupo.setGrupoNombre(etNombreGrupo.getText().toString());
+                            grupo.setGrupoAdmin(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                            grupo.addUsuarioInvitado(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+
+                            CrearGrupoFirebase crearGrupoFirebase = new CrearGrupoFirebase();
+                            crearGrupoFirebase.execute(grupo);
                             finish();
                         }
                     });
@@ -96,86 +97,88 @@ public class AbmcGrupo extends AppCompatActivity {
                     Log.e("Error ::::: ",e.getMessage());
                 }
                 break;
+
+            case GrupoAdapter._KEY_EDITAR_GRUPO:
+                etInvitarUsuario.setVisibility(View.GONE);
+                bInvitarUsuario.setVisibility(View.GONE);
+                etNombreGrupo.setVisibility(View.VISIBLE);
+                buttonAltaGrupo.setVisibility(View.VISIBLE);
+
+                try {
+                    grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
+                    buttonAltaGrupo.setText("Editar grupo");
+                    etNombreGrupo.setText(grupo.getGrupoNombre());
+                    buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            grupo.setGrupoNombre(etNombreGrupo.getText().toString());
+
+                            CrearGrupoFirebase crearGrupoFirebase = new CrearGrupoFirebase();
+                            crearGrupoFirebase.execute(grupo);
+                            finish();
+                        }
+                    });
+                }
+                catch (Exception e){
+                    Toast.makeText(AbmcGrupo.this, "Error !!!",Toast.LENGTH_SHORT).show();
+                    Log.e("Error ::::: ",e.getMessage());
+                }
+                break;
+
             case GrupoAdapter._KEY_BORRAR_GRUPO:
                 String grupoIdBorrar = extras.getString(GrupoAdapter._GRUPO_KEY);
-                //ELIMINAR EL GRUPO DE FIREBASE DATABASE
-                databaseGrupos.child(grupoIdBorrar).removeValue();
+                BorrarGrupoFirebase borrarGrupoFirebase = new BorrarGrupoFirebase();
+                borrarGrupoFirebase.execute(grupoIdBorrar);
                 finish();
                 break;
-            case GrupoAdapter._KEY_EDITAR_GRUPO:
-                grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
-                // findViews
-                buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
-                buttonAltaGrupo.setText("Editar grupo");
-                etNombreGrupo = (EditText) findViewById(R.id.editTextNombreGrupo);
-                etNombreGrupo.setText(grupo.getGrupoNombre());
-                buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        grupo.setGrupoNombre(etNombreGrupo.getText().toString());
-                        databaseGrupos.child(grupo.getGrupoId()).setValue(grupo);
-                        finish();
-                    }
-                });
 
-                break;
             case GrupoAdapter._KEY_INVITAR_USUARIO:
-                //  AGREGAR UN MIEMBRO A UN GRUPO
-                // En este caso habría que buscar la forma de validar el email del usuario ingresado
+                etInvitarUsuario.setVisibility(View.VISIBLE);
+                bInvitarUsuario.setVisibility(View.VISIBLE);
+                etNombreGrupo.setVisibility(View.GONE);
+                buttonAltaGrupo.setVisibility(View.GONE);
+
                 grupo = extras.getParcelable(GrupoAdapter._GRUPO_KEY);
-                // findViews
-                buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
-                buttonAltaGrupo.setText("Invitar Usuario");
-                etNombreGrupo = (EditText) findViewById(R.id.editTextNombreGrupo);
-                // REUTILIZO EL EditText nombre del grupo
-                etNombreGrupo.setHint("Correo del usuario");
-                etNombreGrupo.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-
-
-                buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
+                bInvitarUsuario.setText("Invitar Usuario");
+                bInvitarUsuario.setOnClickListener(new Button.OnClickListener() {
                     @Override
                     public void onClick(View view) {
+
                         ////////////////////////////////////////////////////////////
                         //  FALTA VALIDAR QUE EL EMAIL EXISTA EN BASE DE DATOS!!! //
                         ////////////////////////////////////////////////////////////
-                        grupo.addUsuarioInvitado(etNombreGrupo.getText().toString());
-                        databaseGrupos.child(grupo.getGrupoId()).setValue(grupo);
+                        grupo.addUsuarioInvitado(etInvitarUsuario.getText().toString());
+
+                        CrearGrupoFirebase crearGrupoFirebase = new CrearGrupoFirebase();
+                        crearGrupoFirebase.execute(grupo);
                         finish();
                     }
                 });
-
                 break;
         }
-
     }
 
 
 
-    // Insertar usuario en al base de datos Firebase
-    private void createGrupoFirebase(String nombreGrupo) {
-        String id = databaseGrupos.push().getKey();
-        Grupo grupo = new Grupo();
-        grupo.setGrupoId(id);
-        grupo.setGrupoNombre(nombreGrupo);
-        grupo.setGrupoAdmin(mAuth.getCurrentUser().getEmail());
-        grupo.addUsuarioInvitado(mAuth.getCurrentUser().getEmail());
+    // Insertar grupo en al base de datos Firebase
+    class CrearGrupoFirebase extends AsyncTask<Grupo, Void, Void> {
 
+        @Override
+        protected Void doInBackground(Grupo... grupos) {
+            GruposDatabase gruposDatabase = GruposDatabase.getInstance();
+            gruposDatabase.insertarGrupo(grupos[0]);
+            return null;
+        }
+    }
 
+    // Borrar grupo en al base de datos Firebase
+    class BorrarGrupoFirebase extends AsyncTask<String, Void, Void> {
 
-
-        databaseGrupos.child(id).setValue(grupo).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Log.d("ERROR :::","onCompleteListener task Successful ");
-                    Toast.makeText(AbmcGrupo.this, "Grupo creado ",Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Log.e("ERROR :::","onCompleteListener task unsuccessful ");
-                    Toast.makeText(AbmcGrupo.this, "Error al crear grupo ",Toast.LENGTH_SHORT).show();
-                }
-
-            }
-        });
+        @Override
+        protected Void doInBackground(String... grupos) {
+            GruposDatabase gruposDatabase = GruposDatabase.getInstance();
+            gruposDatabase.borrarGrupo(grupos[0]);
+            return null;
+        }
     }
 }

@@ -60,7 +60,7 @@ public class MisListas extends AppCompatActivity {
             setSupportActionBar(toolbar);
             ActionBar actionBar = getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setTitle( "LISTA DE PRODUCTOS" );
+            actionBar.setTitle( "EVENTOS" );
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }

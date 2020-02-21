@@ -1,7 +1,5 @@
 package com.example.doshop.domain;
 
-import java.util.Objects;
-
 public class Usuario {
     private String userId;
     private String userName;

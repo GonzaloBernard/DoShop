@@ -14,9 +14,11 @@ public class Evento implements Parcelable{
     private String eventoId;
     private String eventoNombre;
     private String eventoDescripcion;
-
-    // Se debería cambiar de Producto a Elemento cuando se agregue Elemento al modelo de clases
+    // Se debería cambiar de <Producto> a <Elemento> cuando se agregue la clase padre Elemento al modelo
     private List<Producto> listaElementos = new ArrayList<>();
+    private EventoTipo eventoTipo;
+    private EventoPrioridad eventoPrioridad;
+    private String usuarioResponsableId;
 
     public String getEventoId() {
         return eventoId;
@@ -54,6 +56,30 @@ public class Evento implements Parcelable{
         this.eventoDescripcion = eventoDescripcion;
     }
 
+    public EventoTipo getEventoTipo() {
+        return eventoTipo;
+    }
+
+    public void setEventoTipo(EventoTipo eventoTipo) {
+        this.eventoTipo = eventoTipo;
+    }
+
+    public EventoPrioridad getEventoPrioridad() {
+        return eventoPrioridad;
+    }
+
+    public void setEventoPrioridad(EventoPrioridad eventoPrioridad) {
+        this.eventoPrioridad = eventoPrioridad;
+    }
+
+    public String getUsuarioResponsableId() {
+        return usuarioResponsableId;
+    }
+
+    public void setUsuarioResponsableId(String usuarioResponsableId) {
+        this.usuarioResponsableId = usuarioResponsableId;
+    }
+
     public Evento(Parcel in){
         readFromParcel(in);
     }
@@ -69,6 +95,9 @@ public class Evento implements Parcelable{
         dest.writeString(eventoNombre);
         dest.writeString(eventoDescripcion);
         dest.writeList(listaElementos);
+        dest.writeParcelable(eventoTipo,0);
+        dest.writeParcelable(eventoPrioridad,0);
+        dest.writeString(usuarioResponsableId);
 
     }
 
@@ -77,6 +106,9 @@ public class Evento implements Parcelable{
         this.eventoNombre = in.readString();
         this.eventoDescripcion = in.readString();
         in.readList(this.listaElementos, this.getClass().getClassLoader());
+        this.eventoTipo = in.readParcelable(this.getClass().getClassLoader());
+        this.eventoPrioridad = in.readParcelable(this.getClass().getClassLoader());
+        this.usuarioResponsableId = in.readString();
 
     }
 
