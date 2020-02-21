@@ -16,5 +16,29 @@
         android:theme="@style/Theme.AppCompat.Light"
         app:titleTextColor="@color/titulo_toolbar" />
 
+    <EditText
+        android:id="@+id/etEventoNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Nombre del evento"
+        android:inputType="textPersonName" />
+
+    <Spinner
+        android:id="@+id/sEventoTipo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Spinner
+        android:id="@+id/sEventoPrioridad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <Button
+        android:id="@+id/bEventoCrear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Crear Evento" />
+
 
 </LinearLayout>

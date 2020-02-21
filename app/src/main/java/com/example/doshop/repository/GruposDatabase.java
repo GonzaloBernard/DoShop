@@ -1,4 +1,4 @@
-package com.example.doshop;
+package com.example.doshop.repository;
 
 import android.util.Log;
 import androidx.annotation.NonNull;

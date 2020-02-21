@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.doshop.repository.GruposDatabase;
 import com.example.doshop.domain.Grupo;
 import com.google.firebase.auth.FirebaseAuth;
 

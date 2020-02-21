@@ -34,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin"
-            android:text="@string/ButtonVerLista"
+            android:text="@string/ButtonVerEventos"
             android:visibility="visible" />
 
         <LinearLayout

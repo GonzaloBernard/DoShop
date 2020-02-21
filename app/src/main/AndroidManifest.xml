@@ -12,6 +12,9 @@
         <activity
             android:name=".AbmcGrupo"
             android:parentActivityName=".MisGrupos"></activity>
+        <activity
+            android:name=".AbmcEvento"
+            android:parentActivityName=".MisGrupos"></activity>
         <activity android:name=".LoginUsuario">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
