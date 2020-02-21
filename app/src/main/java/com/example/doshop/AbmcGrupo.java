@@ -19,12 +19,10 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class AbmcGrupo extends AppCompatActivity {
-
     private Button buttonAltaGrupo;
     private Button bInvitarUsuario;
     private EditText etNombreGrupo;
     private EditText etInvitarUsuario;
-    private FirebaseAuth mAuth;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -84,8 +82,8 @@ public class AbmcGrupo extends AppCompatActivity {
                             Grupo grupo = new Grupo();
                             grupo.setGrupoId("");
                             grupo.setGrupoNombre(etNombreGrupo.getText().toString());
-                            grupo.setGrupoAdmin(mAuth.getCurrentUser().getEmail());
-                            grupo.addUsuarioInvitado(mAuth.getCurrentUser().getEmail());
+                            grupo.setGrupoAdmin(FirebaseAuth.getInstance().getCurrentUser().getEmail());
+                            grupo.addUsuarioInvitado(FirebaseAuth.getInstance().getCurrentUser().getEmail());
 
                             CrearGrupoFirebase crearGrupoFirebase = new CrearGrupoFirebase();
                             crearGrupoFirebase.execute(grupo);

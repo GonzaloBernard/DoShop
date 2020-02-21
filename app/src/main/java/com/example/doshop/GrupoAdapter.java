@@ -146,11 +146,6 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         holder.bInvitarUsuario.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-                // USUARIO INVITADO HARDCODEADO
-
-                //grupo.getidUsuariosInvitados().add("-M0GOUwvYfBSCsRm_OJF");
-                //grupo.getidUsuariosInvitados().add("-M0GOF6tMB93OxzOw85F");
-
                 Intent intent = new Intent(context, AbmcGrupo.class);
                 //EL MODO DETERMINA LA ACCION A REALIZAR
                 intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_INVITAR_USUARIO );
@@ -166,17 +161,11 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         holder.bAgregarEvento.setOnClickListener(new Button.OnClickListener(){
             @Override
             public void onClick(View view) {
-
-                /*
-                Intent intent = new Intent(context, AbmcGrupo.class);
+                Intent intent = new Intent(context, AbmcEvento.class);
                 //EL MODO DETERMINA LA ACCION A REALIZAR
                 intent.putExtra(_ABMC_EVENTO_MODO_KEY, _KEY_CREAR_EVENTO );
-                //SE EDITA EL GRUPO
-                intent.putExtra(_GRUPO_KEY, grupo );
+                intent.putExtra(_GRUPO_KEY, grupo);
                 ((Activity) context).startActivity(intent);
-
-                 */
-
             }
         });
 
