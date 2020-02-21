@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menuGestionGruposAgregarEvento"
-        android:title="Nuevo Evento"
+        android:title="@string/ButtonNuevoEvento"
         android:orderInCategory="1" app:showAsAction="never"></item>
     <item android:id="@+id/menuGestionGruposInvitarUsuario"
-        android:title="Invitar Usuario"
+        android:title="@string/ButtonInvitarUsuarios"
         android:orderInCategory="2" app:showAsAction="never"></item>
     <item android:id="@+id/menuGestionGruposEditarGrupos"
-        android:title="Editar Grupo"
+        android:title="@string/ButtonEditarGrupo"
         android:orderInCategory="3" app:showAsAction="never"></item>
     <item android:id="@+id/menuGestionGruposEliminarGrupo"
-        android:title="Eliminar Grupo"
+        android:title="@string/ButtonEliminarGrupo"
         android:orderInCategory="4" app:showAsAction="never"></item>
 </menu>

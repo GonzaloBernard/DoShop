@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item android:id="@+id/menuGruposAgregarProducto"
-        android:title=" + Producto"
+        android:title="@string/ButtonMasProductos"
         android:orderInCategory="1" app:showAsAction="never"></item>
 
 </menu>

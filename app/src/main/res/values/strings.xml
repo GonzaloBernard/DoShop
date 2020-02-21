@@ -6,15 +6,14 @@
     <string name="ButtonQuitarLista">Quitar</string>
     <string name="ButtonBorrarGrupo">Borrar</string>
     <string name="ButtonCrearGrupo">Crear Grupo</string>
-    <string name="ButtonEditarLista">Editar</string>
     <string name="ButtonVerEventos">VER EVENTOS</string>
     <string name="EditTextEmailLogin">Email</string>
     <string name="EditTextContraseñaLogin">Contraseña</string>
     <string name="ButtonCrearUsuario"> Crear Usuario </string>
     <string name="ButtonSignIn"> Sign in </string>
     <string name="ButtonInvitarUsuarios">Invitar Usuario</string>
-    <string name="ButtonEditarGrupo">Editar</string>
-    <string name="ButtonELiminarGrupo">Eliminar</string>
+    <string name="ButtonEditar">Editar</string>
+    <string name="ButtonEiminar">Eliminar</string>
     <string name="EditTextNombreGrupo">Nombre grupo</string>
     <string name="Salir">Salir</string>
     <string name="EditTextNombreProducto">Nombre</string>
@@ -24,5 +23,12 @@
     <string name="ButtonCrearEvento">Crear Evento</string>
     <string name="EditTextNombreEvento">Nombre del evento</string>
     <string name="ButtonCerrarSesion">Cerrar sesión</string>
+    <string name="ButtonNuevoEvento">NuevoEvento</string>
+    <string name="ButtonEliminarGrupo">Eliminar Grupo</string>
+    <string name="ButtonEditarGrupo">Editar Grupo</string>
+    <string name="ButtonMasProductos"> + Producto</string>
+
+
+
 
 </resources>
