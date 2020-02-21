@@ -16,13 +16,10 @@ import android.widget.Toast;
 
 import com.example.doshop.domain.Grupo;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 
 public class AbmcGrupo extends AppCompatActivity {
-
-    DatabaseReference databaseGrupos;
+    
     private Button buttonAltaGrupo;
     private Button bInvitarUsuario;
     private EditText etNombreGrupo;
@@ -69,8 +66,6 @@ public class AbmcGrupo extends AppCompatActivity {
         // Get usuario autentificado
         String user = mAuth.getCurrentUser().getUid();
 
-        // Referencia a la tabla grupos
-        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos").child(user);
 
         // findViews
         buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
@@ -91,10 +86,9 @@ public class AbmcGrupo extends AppCompatActivity {
                     buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            // Insertar grupo en Firebase database
-                            String id = databaseGrupos.push().getKey();
+
                             Grupo grupo = new Grupo();
-                            grupo.setGrupoId(id);
+                            grupo.setGrupoId("");
                             grupo.setGrupoNombre(etNombreGrupo.getText().toString());
                             grupo.setGrupoAdmin(mAuth.getCurrentUser().getEmail());
                             grupo.addUsuarioInvitado(mAuth.getCurrentUser().getEmail());
