@@ -2,6 +2,8 @@ package com.example.doshop;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,8 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class LoginUsuario extends AppCompatActivity {
 
@@ -33,6 +38,7 @@ public class LoginUsuario extends AppCompatActivity {
     private EditText mPasswordField;
 
     DatabaseReference databaseUsers;
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -82,35 +88,52 @@ public class LoginUsuario extends AppCompatActivity {
         mPasswordField = (EditText) findViewById(R.id.password);
         loginButton = (Button) findViewById(R.id.login);
         signinButton = (Button) findViewById(R.id.signin);
-
+        mEmailField.setError(null);
+        mPasswordField.setError(null);
+        mEmailField.addTextChangedListener(loginTextWatcher);
+        mPasswordField.addTextChangedListener(loginTextWatcher);
 
         loginButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validateForm()){
                     createAccount(mEmailField.getText().toString(), mPasswordField.getText().toString());
-                }
             }
         });
 
         signinButton.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(validateForm()) {
                     signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-                }
             }
         });
 
     }
 
-    private void createAccount(final String email, String password) {
+    private TextWatcher loginTextWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String usernameInput = mEmailField.getText().toString().trim();
+            String passwordInput = mPasswordField.getText().toString().trim();
+            loginButton.setEnabled(!usernameInput.isEmpty() && !passwordInput.isEmpty());
+            signinButton.setEnabled(!usernameInput.isEmpty() && !passwordInput.isEmpty());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+        }
+    };
+
+    private void createAccount(final String email, String password) {
         // [START create_user_with_email]
-        Task<AuthResult> mAuthTask = mAuth.createUserWithEmailAndPassword(email, password);
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        handlerErrors(0,task);
                         if (task.isSuccessful()) {
                             try {
                                 // Guardar usuario en base de datos
@@ -124,13 +147,12 @@ public class LoginUsuario extends AppCompatActivity {
                             }
                             catch (Exception e){
                                 Log.w(TAG, e.getMessage(), task.getException());
-                                Toast.makeText(LoginUsuario.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginUsuario.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(LoginUsuario.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(LoginUsuario.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -155,12 +177,12 @@ public class LoginUsuario extends AppCompatActivity {
         databaseUsers.child(id).setValue(usuario);
         Toast.makeText(LoginUsuario.this, "Usuario Firebase creado ",Toast.LENGTH_SHORT).show();
     }
-    private void signIn(String email, String password) {
-
+    private void signIn(final String email, String password) {
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        handlerErrors(1,task);
                         if (task.isSuccessful()) {
                             try {
                                 // Sign in success, update UI with the signed-in user's information
@@ -173,7 +195,7 @@ public class LoginUsuario extends AppCompatActivity {
                             catch (Exception e){
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, e.getMessage(), task.getException());
-                                Toast.makeText(LoginUsuario.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                                //Toast.makeText(LoginUsuario.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             // If sign in fails, display a message to the user.
@@ -186,10 +208,50 @@ public class LoginUsuario extends AppCompatActivity {
 
     }
 
-    public void handlerErrors(Error error){
+    //Seguridad de autenticacion y manejo de la misma
+    public void handlerErrors(final int btn, final Task<AuthResult> task){
+        databaseUsers.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Boolean exists = false; //flag para comprobar existencia de usuario
+                String mail = mEmailField.getText().toString();
+                try{
+                    if(validateForm()) {
+                        for (DataSnapshot snapshot:dataSnapshot.getChildren()) {
+                            Usuario user = snapshot.getValue(Usuario.class); //obtengo una instancia x de la bd
+                            if (user.getUserName().equals(mail)) {
+                                exists = true;
+                                break;
+                            } else {
+                                exists = false;
+                            }
+                            //String uid = snapshot.getKey();
+                        }
+                        //Aqui se pueden agregar mas errores que puedan llegar a suceder
+                        if (exists && btn==0){
+                            if(!task.isSuccessful())mEmailField.setError("Debe utilizar otro correo electrónico");
+                        }else if(exists && btn==1){
+                            if(!task.isSuccessful()) mPasswordField.setError("La contraseña es incorrecta");
+                            else throw new Exception("Autenticacón exitosa");
+                        }else if(!exists && btn ==1){
+                            throw new Exception("Debe primero crear el usuario");
+                        }else{
+                            mEmailField.setError("Este no es un correo válido");
+                            throw new Exception("Los campos no son correctos");
+                        }
+                    }
+                }catch (Exception e){
+                    Toast.makeText(LoginUsuario.this, e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
 
-
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
     }
+
 
 
     // Validaciones para los datos de entrada
@@ -198,11 +260,14 @@ public class LoginUsuario extends AppCompatActivity {
         String correo = mEmailField.getText().toString();
         int passw = mPasswordField.getText().toString().length();
         try{
-            // Aca van todoss los datos de entrada
-            //if (correo.length()<6 || correo.length() > 60) mEmailField.setError("No se corresponde a un correo válido");
-            //if (passw < 6) mPasswordField.setError("La contraseña es incorrecta");
-            if (correo.length()<6 || correo.length() > 60) throw new Exception("Invalid Email");
-            if (passw <6) throw new Exception("Invalid Password");
+            if (correo.length()<6 || correo.length() > 60){
+                mEmailField.setError("No se corresponde con un correo válido");
+                throw new Exception("Invalid Email");
+            }
+            if (passw <6){
+                mPasswordField.setError("La contraseña debe tener mas de 6 carácteres");
+                throw new Exception("Invalid Password");
+            }
         }
         catch (Exception e){
             valid=false;
