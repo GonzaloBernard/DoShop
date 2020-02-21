@@ -6,10 +6,12 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,76 +61,11 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         // la gestión de grupo
 
         if (FirebaseAuth.getInstance().getCurrentUser().getEmail().equals(grupo.getGrupoAdmin())){
-            holder.loGrupoAdmin.setVisibility(View.VISIBLE);
+            holder.bFilaGrupoMenu.setVisibility(View.VISIBLE);
         }
         else {
-            holder.loGrupoAdmin.setVisibility(View.GONE);
+            holder.bFilaGrupoMenu.setVisibility(View.GONE);
         }
-
-
-        ///////////////////////////////
-        //CLICK EN BOTON ELIMINAR//////
-        ///////////////////////////////
-        holder.bEliminarGrupo.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setMessage("Quiere eliminar el grupo?")
-                        .setTitle("ELIMINAR GRUPO")
-                        .setPositiveButton("ELIMINAR",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dlgInt, int i) {
-                                        Intent intent = new Intent(context, AbmcGrupo.class);
-                                        //EL MODO DETERMINA LA ACCION A REALIZAR
-                                        intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_BORRAR_GRUPO );
-                                        //SE ELIMINA EL GRUPO
-                                        intent.putExtra(_GRUPO_KEY, grupo.getGrupoId());
-                                        ((Activity) context).startActivity(intent);
-                                    }
-                                }).setNegativeButton("CONSERVAR",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dlgInt, int i) {
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-
-        });
-
-        ///////////////////////////////
-        //CLICK EN BOTON EDITAR//////
-        ///////////////////////////////
-        holder.bEditarGrupo.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
-                builder.setMessage("Quiere editar el grupo?")
-                        .setTitle("EDITAR GRUPO")
-                        .setPositiveButton("EDITAR",
-                                new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dlgInt, int i) {
-                                        Intent intent = new Intent(context, AbmcGrupo.class);
-                                        //EL MODO DETERMINA LA ACCION A REALIZAR
-                                        intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_EDITAR_GRUPO );
-                                        //SE EDITA EL GRUPO
-                                        intent.putExtra(_GRUPO_KEY, grupo );
-                                        ((Activity) context).startActivity(intent);
-                                    }
-                                }).setNegativeButton("CONSERVAR",
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dlgInt, int i) {
-                            }
-                        });
-                AlertDialog dialog = builder.create();
-                dialog.show();
-            }
-
-        });
 
         ///////////////////////////////
         //CLICK EN BOTON VER LISTA//////
@@ -140,32 +77,81 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
                 ((Activity) context).startActivity(intent);
             }
         });
-        ///////////////////////////////////////
-        //CLICK EN BOTON INVITAR USUARIO //////
-        ///////////////////////////////////////
-        holder.bInvitarUsuario.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AbmcGrupo.class);
-                //EL MODO DETERMINA LA ACCION A REALIZAR
-                intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_INVITAR_USUARIO );
-                //SE EDITA EL GRUPO
-                intent.putExtra(_GRUPO_KEY, grupo );
-                ((Activity) context).startActivity(intent);
 
-            }
-        });
-        ///////////////////////////////////////
-        //CLICK EN BOTON AGREGAR EVENTO  //////
-        ///////////////////////////////////////
-        holder.bAgregarEvento.setOnClickListener(new Button.OnClickListener(){
+
+        ////////////////////////////////////////
+        // MENU DE OPCIONES ////////////////////
+        // GESTION DE GRUPOS ///////////////////
+        ////////////////////////////////////////
+        holder.bFilaGrupoMenu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, AbmcEvento.class);
-                //EL MODO DETERMINA LA ACCION A REALIZAR
-                intent.putExtra(_ABMC_EVENTO_MODO_KEY, _KEY_CREAR_EVENTO );
-                intent.putExtra(_GRUPO_KEY, grupo);
-                ((Activity) context).startActivity(intent);
+            public void onClick(final View view) {
+
+                //creating a popup menu
+                PopupMenu popup = new PopupMenu(context, holder.bFilaGrupoMenu);
+                //inflating menu from xml resource
+                popup.inflate(R.menu.menu_gestion_grupos);
+                //adding click listener
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.menuGestionGruposAgregarEvento:
+                                Intent i1 = new Intent(context, AbmcEvento.class);
+                                //EL MODO DETERMINA LA ACCION A REALIZAR
+                                i1.putExtra(_ABMC_EVENTO_MODO_KEY, _KEY_CREAR_EVENTO );
+                                i1.putExtra(_GRUPO_KEY, grupo);
+                                ((Activity) context).startActivity(i1);
+                                return true;
+                            case R.id.menuGestionGruposEditarGrupos:
+                                Intent intent = new Intent(context, AbmcGrupo.class);
+                                //EL MODO DETERMINA LA ACCION A REALIZAR
+                                intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_EDITAR_GRUPO );
+                                //SE EDITA EL GRUPO
+                                intent.putExtra(_GRUPO_KEY, grupo );
+                                ((Activity) context).startActivity(intent);
+                                return true;
+                            case R.id.menuGestionGruposEliminarGrupo:
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
+                                builder.setMessage("Quiere eliminar el grupo?")
+                                        .setTitle("ELIMINAR GRUPO")
+                                        .setPositiveButton("ELIMINAR",
+                                                new DialogInterface.OnClickListener() {
+                                                    @Override
+                                                    public void onClick(DialogInterface dlgInt, int i) {
+                                                        Intent intent = new Intent(context, AbmcGrupo.class);
+                                                        //EL MODO DETERMINA LA ACCION A REALIZAR
+                                                        intent.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_BORRAR_GRUPO );
+                                                        //SE ELIMINA EL GRUPO
+                                                        intent.putExtra(_GRUPO_KEY, grupo.getGrupoId());
+                                                        ((Activity) context).startActivity(intent);
+                                                    }
+                                                }).setNegativeButton("CONSERVAR",
+                                        new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dlgInt, int i) {
+                                            }
+                                        });
+                                AlertDialog dialog = builder.create();
+                                dialog.show();
+
+                                return true;
+                            case R.id.menuGestionGruposInvitarUsuario:
+                                Intent i4 = new Intent(context, AbmcGrupo.class);
+                                //EL MODO DETERMINA LA ACCION A REALIZAR
+                                i4.putExtra(_ABMC_GRUPO_MODO_KEY, _KEY_INVITAR_USUARIO );
+                                //SE EDITA EL GRUPO
+                                i4.putExtra(_GRUPO_KEY, grupo );
+                                ((Activity) context).startActivity(i4);
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
+                popup.show();
+
             }
         });
 
@@ -174,23 +160,15 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
 
         TextView tvGrupoNombre;
         TextView tvGrupoAdmin;
-        Button bEditarGrupo;
-        Button bEliminarGrupo;
         Button bVerLista;
-        Button bInvitarUsuario;
-        Button bAgregarEvento;
-        LinearLayout loGrupoAdmin;
+        Button bFilaGrupoMenu;
 
         public GrupoHolder(View base) {
             super(base);
             this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
             this.tvGrupoAdmin = (TextView) base.findViewById(R.id.tvGrupoAdmin);
-            this.bEditarGrupo = (Button) base.findViewById(R.id.buttonEditarGrupo);
-            this.bEliminarGrupo = (Button) base.findViewById(R.id.buttonEliminarGrupo);
             this.bVerLista = (Button) base.findViewById(R.id.buttonVerLista);
-            this.bInvitarUsuario = (Button) base.findViewById(R.id.buttonInvitarUsuario);
-            this.bAgregarEvento = (Button) base.findViewById(R.id.bAgregarEvento);
-            this.loGrupoAdmin = (LinearLayout) base.findViewById(R.id.loGrupoAdmin);
+            this.bFilaGrupoMenu = (Button) base.findViewById(R.id.bFilaGrupoMenu);
 
         }
     }
