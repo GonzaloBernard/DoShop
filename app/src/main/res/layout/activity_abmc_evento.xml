@@ -27,12 +27,12 @@
     <Spinner
         android:id="@+id/sEventoTipo"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="65dp" />
 
     <Spinner
         android:id="@+id/sEventoPrioridad"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="69dp" />
 
     <Button
         android:id="@+id/bEventoCrear"
