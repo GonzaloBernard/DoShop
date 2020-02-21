@@ -30,9 +30,9 @@ public class AbmcGrupo extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_abmc_grupo, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
                 onBackPressed();
@@ -42,11 +42,11 @@ public class AbmcGrupo extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_abmc_grupo);
-
         //TOOLBAR
         try {
             Toolbar toolbar = (Toolbar) findViewById(R.id.tbAbmcGrupo);
@@ -79,13 +79,11 @@ public class AbmcGrupo extends AppCompatActivity {
                     buttonAltaGrupo.setOnClickListener(new Button.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-
                             Grupo grupo = new Grupo();
                             grupo.setGrupoId("");
                             grupo.setGrupoNombre(etNombreGrupo.getText().toString());
                             grupo.setGrupoAdmin(FirebaseAuth.getInstance().getCurrentUser().getEmail());
                             grupo.addUsuarioInvitado(FirebaseAuth.getInstance().getCurrentUser().getEmail());
-
                             CrearGrupoFirebase crearGrupoFirebase = new CrearGrupoFirebase();
                             crearGrupoFirebase.execute(grupo);
                             finish();
@@ -173,7 +171,6 @@ public class AbmcGrupo extends AppCompatActivity {
 
     // Borrar grupo en al base de datos Firebase
     class BorrarGrupoFirebase extends AsyncTask<String, Void, Void> {
-
         @Override
         protected Void doInBackground(String... grupos) {
             GruposDatabase gruposDatabase = GruposDatabase.getInstance();

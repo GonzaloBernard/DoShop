@@ -22,6 +22,7 @@ public class GruposDatabase {
         }
         return _GRUPOS_DATABASE;
     }
+
     public void insertarGrupo(Grupo grupo){
         // Get usuario autentificado
         String usuarioId = FirebaseAuth.getInstance().getCurrentUser().getUid();
