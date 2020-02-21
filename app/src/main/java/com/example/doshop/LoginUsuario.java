@@ -187,7 +187,7 @@ public class LoginUsuario extends AppCompatActivity {
                             try {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
-                                Toast.makeText(LoginUsuario.this, "Authentication success.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginUsuario.this, "Autenticación Exitosa", Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(LoginUsuario.this, MisGrupos.class);
                                 startActivity(i);
                                 finish();
@@ -200,7 +200,7 @@ public class LoginUsuario extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginUsuario.this, "Authentication failed.",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginUsuario.this, "La autenticación falló.",Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -232,10 +232,11 @@ public class LoginUsuario extends AppCompatActivity {
                             if(!task.isSuccessful())mEmailField.setError("Debe utilizar otro correo electrónico");
                         }else if(exists && btn==1){
                             if(!task.isSuccessful()) mPasswordField.setError("La contraseña es incorrecta");
-                            else throw new Exception("Autenticacón exitosa");
                         }else if(!exists && btn ==1){
                             throw new Exception("Debe primero crear el usuario");
-                        }else{
+                        }else if (!exists && btn ==0){
+                            throw new Exception("Usuario creado exitosamente");}
+                        else{
                             mEmailField.setError("Este no es un correo válido");
                             throw new Exception("Los campos no son correctos");
                         }
