@@ -17,28 +17,31 @@
         app:titleTextColor="@color/titulo_toolbar" />
 
     <EditText
-        android:id="@+id/etEventoNombre"
+        android:id="@+id/editTextEventoNombre"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="Nombre del evento"
+        android:hint="@string/EditTextNombreEvento"
         android:inputType="textPersonName" />
 
     <Spinner
         android:id="@+id/sEventoTipo"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="match_parent"
         android:layout_height="65dp" />
 
     <Spinner
         android:id="@+id/sEventoPrioridad"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="match_parent"
         android:layout_height="69dp" />
 
     <Button
         android:id="@+id/bEventoCrear"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Crear Evento" />
+        android:text="@string/ButtonCrearEvento" />
 
 
 </LinearLayout>

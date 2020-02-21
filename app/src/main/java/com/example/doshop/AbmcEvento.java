@@ -61,7 +61,7 @@ public class AbmcEvento extends AppCompatActivity {
         final Bundle extras = getIntent().getExtras();
 
         // FINDVIEWS
-        etEventoNombre = (EditText) findViewById(R.id.etEventoNombre);
+        etEventoNombre = (EditText) findViewById(R.id.editTextEventoNombre);
         bEventoCrear = (Button) findViewById(R.id.bEventoCrear);
         sEventoTipo = (Spinner) findViewById(R.id.sEventoTipo);
         sEventoPrioridad = (Spinner) findViewById(R.id.sEventoPrioridad);
