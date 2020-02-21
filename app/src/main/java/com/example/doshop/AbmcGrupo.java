@@ -19,7 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 public class AbmcGrupo extends AppCompatActivity {
-    
+
     private Button buttonAltaGrupo;
     private Button bInvitarUsuario;
     private EditText etNombreGrupo;
@@ -60,12 +60,6 @@ public class AbmcGrupo extends AppCompatActivity {
         }
 
         Bundle extras = getIntent().getExtras();
-
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
-        // Get usuario autentificado
-        String user = mAuth.getCurrentUser().getUid();
-
 
         // findViews
         buttonAltaGrupo = (Button) findViewById(R.id.buttonAltaGrupo);
