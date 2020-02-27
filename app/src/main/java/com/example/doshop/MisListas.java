@@ -23,7 +23,7 @@ public class MisListas extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_grupos, menu);
+        getMenuInflater().inflate(R.menu.menu_Productos, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override

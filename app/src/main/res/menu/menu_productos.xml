@@ -2,6 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item
+        android:id="@+id/buscarProductos"
+        android:icon="@drawable/ic_lupa"
+        android:title="Buscar Producto"
+        app:actionViewClass="android.widget.SearchView"
+        android:orderInCategory="100"
+        app:showAsAction="ifRoom|withText"
+        android:visible="true" />
+
     <item android:id="@+id/menuGruposAgregarProducto"
         android:title="@string/ButtonMasProductos"
         android:orderInCategory="1" app:showAsAction="never"></item>

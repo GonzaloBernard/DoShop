@@ -155,6 +155,8 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         });
 
     }
+
+
     public class GrupoHolder extends RecyclerView.ViewHolder {
 
         TextView tvGrupoNombre;
