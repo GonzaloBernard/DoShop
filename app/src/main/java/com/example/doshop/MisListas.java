@@ -1,5 +1,6 @@
 package com.example.doshop;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +24,7 @@ public class MisListas extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_Productos, menu);
+        getMenuInflater().inflate(R.menu.menu_productos, menu);
         return super.onCreateOptionsMenu(menu);
     }
     @Override
@@ -31,10 +32,10 @@ public class MisListas extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.menuGruposAgregarProducto:
-                //Intent i1 = new Intent(MisListas.this, AbmcLista.class);
+                Intent i1 = new Intent(MisListas.this, AbmcProduct.class);
                 //EL MODO DETERMINA LA ACCION A REALIZAR
-                //i1.putExtra(GrupoAdapter._ABMC_LISTA_MODO_KEY, GrupoAdapter._KEY_AGREGAR_PRODUCTO );
-                //startActivity(i1);
+                i1.putExtra(GrupoAdapter._ABMC_EVENTO_MODO_KEY, ProductoAdapter._KEY_CREAR_PRODUCTO );
+                startActivity(i1);
                 return true;
 
             case android.R.id.home:
