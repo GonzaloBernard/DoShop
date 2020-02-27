@@ -110,7 +110,6 @@ public class AbmcGrupo extends AppCompatActivity {
                         @Override
                         public void onClick(View view) {
                             grupo.setGrupoNombre(etNombreGrupo.getText().toString());
-
                             CrearGrupoFirebase crearGrupoFirebase = new CrearGrupoFirebase();
                             crearGrupoFirebase.execute(grupo);
                             finish();

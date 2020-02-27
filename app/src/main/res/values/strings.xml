@@ -26,9 +26,10 @@
     <string name="ButtonNuevoEvento">NuevoEvento</string>
     <string name="ButtonEliminarGrupo">Eliminar Grupo</string>
     <string name="ButtonEditarGrupo">Editar Grupo</string>
-    <string name="ButtonMasProductos"> + Producto</string>
-
-
+    <string name="ButtonMasProductos"> Agregar Producto</string>
+    <string name="ButtonAgregarProducto">Agregar producto</string>
+    <string name="TextViewAgregandoProducto">Agregando nuevo producto</string>
+    <string name="TextViewAgregarImagen">Agregar imagen</string>
 
 
 </resources>

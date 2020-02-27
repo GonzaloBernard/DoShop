@@ -16,7 +16,7 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/edtxNombreProd"
+            android:id="@+id/txtvNombreProd"
             android:layout_width="93dp"
             android:layout_height="24dp"
             android:layout_marginStart="20dp"
@@ -30,7 +30,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <TextView
-            android:id="@+id/edtxDescriProd"
+            android:id="@+id/txtvDescriProd"
             android:layout_width="200dp"
             android:layout_height="88dp"
             android:layout_marginStart="20dp"
@@ -39,11 +39,11 @@
             app:layout_constraintEnd_toStartOf="@+id/imgProduct"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtxNombreProd"
+            app:layout_constraintTop_toBottomOf="@+id/txtvNombreProd"
             app:layout_constraintVertical_bias="0.046" />
 
         <TextView
-            android:id="@+id/edtxPrecioProd"
+            android:id="@+id/txtvPrecioProd"
             android:layout_width="91dp"
             android:layout_height="27dp"
             android:layout_marginTop="10dp"
@@ -52,7 +52,7 @@
             app:layout_constraintEnd_toStartOf="@+id/btnQuitarProducto"
             app:layout_constraintHorizontal_bias="0.094"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edtxDescriProd"
+            app:layout_constraintTop_toBottomOf="@+id/txtvDescriProd"
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
@@ -72,11 +72,11 @@
             android:layout_width="99dp"
             android:layout_height="36dp"
             android:layout_marginTop="7dp"
-            android:text="Editat"
+            android:text="Editar"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btnQuitarProducto"
             app:layout_constraintHorizontal_bias="0.881"
-            app:layout_constraintStart_toEndOf="@+id/edtxPrecioProd"
+            app:layout_constraintStart_toEndOf="@+id/txtvPrecioProd"
             app:layout_constraintTop_toBottomOf="@+id/imgProduct"
             app:layout_constraintVertical_bias="0.0" />
 
