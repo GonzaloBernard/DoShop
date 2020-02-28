@@ -164,10 +164,10 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
 
         public GrupoHolder(View base) {
             super(base);
-            this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
-            this.tvGrupoAdmin = (TextView) base.findViewById(R.id.tvGrupoAdmin);
+            this.tvGrupoNombre = (TextView) base.findViewById(R.id.textViewGrupoNombre);
+            this.tvGrupoAdmin = (TextView) base.findViewById(R.id.textViewGrupoAdmin);
             this.bVerLista = (Button) base.findViewById(R.id.buttonVerEventos);
-            this.bFilaGrupoMenu = (Button) base.findViewById(R.id.bFilaGrupoMenu);
+            this.bFilaGrupoMenu = (Button) base.findViewById(R.id.buttonFilaGrupoMenu);
 
         }
     }
