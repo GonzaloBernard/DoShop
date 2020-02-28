@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.doshop.domain.Grupo;
@@ -69,15 +70,14 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         ///////////////////////////////
         //CLICK EN BOTON VER LISTA//////
         ///////////////////////////////
-        holder.bVerLista.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, MisListas.class);
-                ((Activity) context).startActivity(intent);
-            }
+        holder.bVerLista.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, MisListas.class);
+                    ((Activity) context).startActivity(intent);
+
+                }
         });
-
-
         ////////////////////////////////////////
         // MENU DE OPCIONES ////////////////////
         // GESTION DE GRUPOS ///////////////////

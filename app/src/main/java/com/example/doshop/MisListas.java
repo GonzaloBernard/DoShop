@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.doshop.domain.Evento;
 import com.example.doshop.domain.Grupo;
 import com.example.doshop.repository.EventoAdapter;
+import com.example.doshop.repository.GruposDatabase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -30,17 +31,18 @@ import java.util.List;
 public class MisListas extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView mRecyclerView;
-    DatabaseReference databaseListas;
     private FirebaseAuth mAuth;
     DatabaseReference databaseEventos;
+    DatabaseReference databaseGrupos;
     private List<Evento> listaDataSet;
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_productos, menu);
+        getMenuInflater().inflate(R.menu.menu_abmc_evento, menu);
         return super.onCreateOptionsMenu(menu);
     }
+    /*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -51,7 +53,6 @@ public class MisListas extends AppCompatActivity {
                 i1.putExtra(GrupoAdapter._ABMC_EVENTO_MODO_KEY, ProductoAdapter._KEY_CREAR_PRODUCTO );
                 startActivity(i1);
                 return true;
-
             case android.R.id.home:
                 onBackPressed();
                 return true;
@@ -60,29 +61,23 @@ public class MisListas extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_eventos);
 /////////////////////////////////////////////////////////////////////
         /////////////NO SE COMO FUNCIONA LO QUE IRIA ACA ABAJO/////////////////////
 /////////////////////////////////////////////////////////////////////
-       /*
-        listaDataSet = new ArrayList<>();
-
+        /*listaDataSet = new ArrayList<>();
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // Get usuario autentificado
         FirebaseUser currentUser = mAuth.getCurrentUser();
         //Usuario conectado
         String user = currentUser.getUid();
-
-        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos");
+        //databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos");
         */
-
-
         //TOOLBAR
         try {
             Toolbar toolbar = (Toolbar) findViewById(R.id.toolbarMisListas);
@@ -93,7 +88,6 @@ public class MisListas extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
         }
-
         mRecyclerView = (RecyclerView) findViewById(R.id.ListasRecyclerView);
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MisListas.this);
@@ -115,7 +109,6 @@ public class MisListas extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 listaDataSet.clear();
                 String usuario = mAuth.getCurrentUser().getEmail();
-
                 for(DataSnapshot grupoSnapshot: dataSnapshot.getChildren()){
                     for (DataSnapshot data: grupoSnapshot.getChildren()){
                         Evento evento = data.getValue(Evento.class);

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
@@ -72,41 +73,41 @@ public class AbmcProduct extends AppCompatActivity {
             case ProductoAdapter._KEY_CREAR_PRODUCTO:
                 final Evento evento = extras.getParcelable(GrupoAdapter._ABMC_EVENTO_MODO_KEY);
                 final Producto producto = new Producto();
-                btnAddImgProduct.setOnClickListener(new Button.OnClickListener(){
-                    @Override
-                    public void onClick(android.view.View view) {
-                        cargarImagenDeGaleria();
-                        producto.setImagenProducto(imagenProduct);
-                    }
-                });
-                producto.setProductoNombre(etNombreProducto.getText().toString());
-                producto.setProductoPrecio(Float.valueOf(etPrecioProducto.getText().toString()));
-                producto.setProductoId(String.valueOf(evento.getListaElementos().size()));
-                producto.setProductoDescripcion(etDescripcioProducto.getText().toString());
-                btnAddProducto.setOnClickListener(new Button.OnClickListener(){
-                    @Override
-                    public void onClick(View view) {
-                        if(producto.getProductoNombre().isEmpty()){
-                            Toast.makeText(AbmcProduct.this,"Debe ingresar por lo menos un nombre al producto",Toast.LENGTH_SHORT).show();
-                        }else {
-                            evento.addElemento(producto);
-                            AbmcProduct.crearGrupoFirebase actualizarGrupoFireBase = new AbmcProduct.crearGrupoFirebase();
-                            actualizarGrupoFireBase.execute(evento.getGrupoPerteneciente());
+                try{
+                    btnAddImgProduct.setOnClickListener(new Button.OnClickListener(){
+                        @Override
+                        public void onClick(android.view.View view) {
+                            cargarImagenDeGaleria();
+                            producto.setImagenProducto(imagenProduct);
+                        }
+                    });
+                    producto.setProductoNombre(etNombreProducto.getText().toString());
+                    producto.setProductoPrecio(Float.valueOf(etPrecioProducto.getText().toString()));
+                    producto.setProductoId(String.valueOf(evento.getListaElementos().size()));
+                    producto.setProductoDescripcion(etDescripcioProducto.getText().toString());
+                    btnAddProducto.setOnClickListener(new Button.OnClickListener(){
+                        @Override
+                        public void onClick(View view) {
+                            if(producto.getProductoNombre().isEmpty()){
+                                Toast.makeText(AbmcProduct.this,"Debe ingresar por lo menos un nombre al producto",Toast.LENGTH_SHORT).show();
+                            }else {
+                                evento.addElemento(producto);
+                                AbmcProduct.crearGrupoFirebase actualizarGrupoFireBase = new AbmcProduct.crearGrupoFirebase();
+                                actualizarGrupoFireBase.execute(evento.getGrupoPerteneciente());
+                                finish();
+                            }
+
 
                         }
-
-
-                    }
-                });
+                    });
+                }
+                catch (Exception e){
+                    Toast.makeText(AbmcProduct.this, "Error !!!",Toast.LENGTH_SHORT).show();
+                    Log.e("Error ::::: ",e.getMessage());
+                }
+                break;
 
         }
-
-
-
-
-
-
-
 
     }
 
@@ -146,5 +147,14 @@ public class AbmcProduct extends AppCompatActivity {
         }
     }
 
+    /* Borrar grupo en la base de datos Firebase
+    class BorrarGrupoFirebase extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... grupos) {
+            GruposDatabase gruposDatabase = GruposDatabase.getInstance();
+            gruposDatabase.borrarGrupo(grupos[0]);
+            return null;
+        }
+    }*/
 
 }

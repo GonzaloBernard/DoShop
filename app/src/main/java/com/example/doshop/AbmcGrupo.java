@@ -155,8 +155,6 @@ public class AbmcGrupo extends AppCompatActivity {
         }
     }
 
-
-
     // Insertar grupo en al base de datos Firebase
     class CrearGrupoFirebase extends AsyncTask<Grupo, Void, Void> {
 
@@ -168,7 +166,7 @@ public class AbmcGrupo extends AppCompatActivity {
         }
     }
 
-    // Borrar grupo en al base de datos Firebase
+    // Borrar grupo en la base de datos Firebase
     class BorrarGrupoFirebase extends AsyncTask<String, Void, Void> {
         @Override
         protected Void doInBackground(String... grupos) {

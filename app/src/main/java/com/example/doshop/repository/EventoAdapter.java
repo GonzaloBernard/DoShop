@@ -10,9 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doshop.GrupoAdapter;
 import com.example.doshop.R;
+import com.example.doshop.domain.Evento;
+
+import java.util.List;
 
 public class EventoAdapter extends RecyclerView.Adapter<EventoAdapter.EventoHolder>{
 
+
+    public EventoAdapter(List<Evento> listaDataSet) {
+    }
 
     @NonNull
     @Override
