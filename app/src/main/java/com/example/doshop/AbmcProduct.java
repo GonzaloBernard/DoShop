@@ -101,13 +101,6 @@ public class AbmcProduct extends AppCompatActivity {
 
         }
 
-
-
-
-
-
-
-
     }
 
     private void cargarImagenDeGaleria() {
