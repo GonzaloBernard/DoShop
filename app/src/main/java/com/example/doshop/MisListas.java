@@ -120,12 +120,11 @@ public class MisListas extends AppCompatActivity {
                     for (DataSnapshot data: grupoSnapshot.getChildren()){
                         Evento evento = data.getValue(Evento.class);
 
-                        // CORROBORAR QUE EL USUARIO ES MIEMBRO DEL GRUPO
+
                         if(evento.getGrupoPerteneciente().getUsuariosInvitados().contains(usuario)){
                             listaDataSet.add(evento);
                         }
-                        // MUESTRA TODOS LOS GRUPOS
-                        //listaDataSet.add(grupo);
+
                     }
                 }
                 mAdapter = new EventoAdapter(listaDataSet);
