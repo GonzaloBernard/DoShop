@@ -51,6 +51,7 @@ public class MisGrupos extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_principal, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -66,7 +67,6 @@ public class MisGrupos extends AppCompatActivity {
                 Intent i2 = new Intent (MisGrupos.this,LoginUsuario.class);
                 startActivity(i2);
                 return true;
-
             default:
                 Toast.makeText(this, ". . . . ", Toast.LENGTH_LONG).show();
                 return super.onOptionsItemSelected(item);

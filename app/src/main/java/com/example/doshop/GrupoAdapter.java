@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.doshop.domain.Grupo;
@@ -69,15 +70,14 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         ///////////////////////////////
         //CLICK EN BOTON VER LISTA//////
         ///////////////////////////////
-        holder.bVerLista.setOnClickListener(new Button.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(context, MisListas.class);
-                ((Activity) context).startActivity(intent);
-            }
+        holder.bVerLista.setOnClickListener(new Button.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, MisListas.class);
+                    ((Activity) context).startActivity(intent);
+
+                }
         });
-
-
         ////////////////////////////////////////
         // MENU DE OPCIONES ////////////////////
         // GESTION DE GRUPOS ///////////////////
@@ -85,7 +85,6 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         holder.bFilaGrupoMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(context, holder.bFilaGrupoMenu);
                 //inflating menu from xml resource
@@ -111,7 +110,6 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
                                 ((Activity) context).startActivity(intent);
                                 return true;
                             case R.id.menuGestionGruposEliminarGrupo:
-
                                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                                 builder.setMessage("Quiere eliminar el grupo?")
                                         .setTitle("ELIMINAR GRUPO")
@@ -166,10 +164,10 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
 
         public GrupoHolder(View base) {
             super(base);
-            this.tvGrupoNombre = (TextView) base.findViewById(R.id.tvGrupoNombre);
-            this.tvGrupoAdmin = (TextView) base.findViewById(R.id.tvGrupoAdmin);
+            this.tvGrupoNombre = (TextView) base.findViewById(R.id.textViewGrupoNombre);
+            this.tvGrupoAdmin = (TextView) base.findViewById(R.id.textViewGrupoAdmin);
             this.bVerLista = (Button) base.findViewById(R.id.buttonVerEventos);
-            this.bFilaGrupoMenu = (Button) base.findViewById(R.id.bFilaGrupoMenu);
+            this.bFilaGrupoMenu = (Button) base.findViewById(R.id.buttonFilaGrupoMenu);
 
         }
     }
