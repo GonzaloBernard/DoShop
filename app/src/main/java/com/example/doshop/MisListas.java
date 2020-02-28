@@ -6,20 +6,34 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.doshop.domain.Evento;
+import com.example.doshop.domain.Grupo;
+import com.example.doshop.repository.EventoAdapter;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MisListas extends AppCompatActivity {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView mRecyclerView;
     DatabaseReference databaseListas;
     private FirebaseAuth mAuth;
+    DatabaseReference databaseEventos;
+    private List<Evento> listaDataSet;
 
 
     @Override
@@ -52,6 +66,22 @@ public class MisListas extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_eventos);
+/////////////////////////////////////////////////////////////////////
+        /////////////NO SE COMO FUNCIONA LO QUE IRIA ACA ABAJO/////////////////////
+/////////////////////////////////////////////////////////////////////
+       /*
+        listaDataSet = new ArrayList<>();
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+        // Get usuario autentificado
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //Usuario conectado
+        String user = currentUser.getUid();
+
+        databaseGrupos = FirebaseDatabase.getInstance().getReference("grupos");
+        */
+
 
         //TOOLBAR
         try {
@@ -70,5 +100,46 @@ public class MisListas extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        databaseEventos.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                listaDataSet.clear();
+                String usuario = mAuth.getCurrentUser().getEmail();
+
+                for(DataSnapshot grupoSnapshot: dataSnapshot.getChildren()){
+                    for (DataSnapshot data: grupoSnapshot.getChildren()){
+                        Evento evento = data.getValue(Evento.class);
+
+                        // CORROBORAR QUE EL USUARIO ES MIEMBRO DEL GRUPO
+                        if(evento.getGrupoPerteneciente().getUsuariosInvitados().contains(usuario)){
+                            listaDataSet.add(evento);
+                        }
+                        // MUESTRA TODOS LOS GRUPOS
+                        //listaDataSet.add(grupo);
+                    }
+                }
+                mAdapter = new EventoAdapter(listaDataSet);
+                mRecyclerView.setAdapter(mAdapter);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
 
 }
