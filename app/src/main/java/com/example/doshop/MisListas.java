@@ -99,7 +99,7 @@ public class MisListas extends AppCompatActivity {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
-
+/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -132,6 +132,6 @@ public class MisListas extends AppCompatActivity {
         });
     }
 
-
+*/
 
 }
