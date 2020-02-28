@@ -1,8 +1,16 @@
 package com.example.doshop;
 
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.content.BroadcastReceiver;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -15,6 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doshop.domain.Grupo;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -22,12 +31,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MisGrupos extends AppCompatActivity {
-
+    private final BroadcastReceiver br = new MyReceiver();
+    public static final String CHANNEL_ID="99999";
     private RecyclerView mRecyclerView;
     private List<Grupo> listaDataSet;
     private RecyclerView.Adapter mAdapter;
@@ -66,6 +78,9 @@ public class MisGrupos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_grupos);
 
+        // CLOUD MESSAGING: Se guarda el token en las preferencias en caso de que sea un  nuevo usuario
+        getUserToken();
+
         //Inicializo la lista de grupos
         listaDataSet = new ArrayList<>();
 
@@ -95,6 +110,12 @@ public class MisGrupos extends AppCompatActivity {
         mRecyclerView.setHasFixedSize(true);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(MisGrupos.this);
         mRecyclerView.setLayoutManager(mLayoutManager);
+
+        //CREACION DEL CANAL DE NOTIFICACIONES
+        this.createNotificationChannel();
+        IntentFilter filtro = new IntentFilter();
+        registerReceiver(br, filtro);
+
 
     }
 
@@ -136,6 +157,53 @@ public class MisGrupos extends AppCompatActivity {
             }
         });
     }
+    private String getUserToken() {
+        // RECUPERAR TOKEN O CREARLO
+        String TOKEN = getTokenFromPrefs();
+        if (TOKEN == null) {
+            FirebaseInstanceId.getInstance().getInstanceId()
+                    .addOnSuccessListener(this, new OnSuccessListener<InstanceIdResult>() {
+                        @Override
+                        public void onSuccess(InstanceIdResult instanceIdResult) {
+                            String newToken = instanceIdResult.getToken();
+                            saveTokenToPrefs(newToken);
+                            Log.e("newToken", newToken);
+                        }
+                    });
+        }
+        return TOKEN;
+    }
 
+    private void saveTokenToPrefs(String _token){
+        SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("registration_id", _token);
+        editor.apply();
+    }
+    private String getTokenFromPrefs(){
+        SharedPreferences preferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+        return preferences.getString("registration_id", null);
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "CANAL DO SHOP";
+            String description = "Este canal esta creado para configurar las notificaciones de DO SHOP";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel =
+                    new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        unregisterReceiver(br);
+        super.onDestroy();
+    }
 
 }
