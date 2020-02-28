@@ -1,6 +1,9 @@
 package com.example.doshop;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +46,15 @@ public class ProductoAdapter extends RecyclerView.Adapter<ProductoAdapter.Produc
         holder.tvProductNombre.setText(product.getProductoNombre());
         holder.tvProductPrecio.setText(product.getProductoPrecio().toString());
         holder.tvProductoDescr.setText(product.getProductoDescripcion());
-        //holder.imgProduct
+        try {
+            byte[] decodedString = Base64.decode(product.getImagenProducto(), Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            holder.imgProduct.setImageBitmap(decodedByte);
+            //Integer size = product.getImagenProducto().length();
+        }
+        catch (Exception e){
+            holder.imgProduct.setImageResource(R.drawable.image_products);
+        }
 
 
 

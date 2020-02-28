@@ -1,5 +1,6 @@
 package com.example.doshop.domain;
 
+import android.graphics.Bitmap;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.text.Editable;
@@ -11,6 +12,7 @@ public class Producto implements Parcelable {
     private String productoNombre;
     private String productoDescripcion;
     private Float productoPrecio;
+    private String imagenProducto;
 
 
 
@@ -52,6 +54,12 @@ public class Producto implements Parcelable {
         this.productoPrecio = Float.valueOf(String.valueOf(productoPrecio));
     }
 
+    public String getImagenProducto(){return imagenProducto;}
+
+    public void setImagenProducto(String imgProduct){
+        this.imagenProducto = imgProduct;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -63,6 +71,7 @@ public class Producto implements Parcelable {
         dest.writeString(productoNombre);
         dest.writeString(productoDescripcion);
         //dest.writeFloat(productoPrecio);
+        dest.writeString(imagenProducto);
     }
 
     private void readFromParcel(Parcel in) {

@@ -78,6 +78,7 @@ public class AbmcEvento extends AppCompatActivity {
                         Evento evento = new Evento();
                         evento.setEventoId(String.valueOf(grupo.getListaEventos().size()));
                         evento.setEventoNombre(etEventoNombre.getText().toString());
+                        evento.setGrupoPerteneciente(grupo);
                         grupo.addEvento(evento);
                         AbmcEvento.CrearGrupoFirebase crearGrupoFirebase = new AbmcEvento.CrearGrupoFirebase();
                         crearGrupoFirebase.execute(grupo);

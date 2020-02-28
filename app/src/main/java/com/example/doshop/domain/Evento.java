@@ -19,6 +19,7 @@ public class Evento implements Parcelable{
     private EventoTipo eventoTipo;
     private EventoPrioridad eventoPrioridad;
     private String usuarioResponsableId;
+    private Grupo grupoPertenece;
 
     public String getEventoId() {
         return eventoId;
@@ -78,6 +79,14 @@ public class Evento implements Parcelable{
 
     public void setUsuarioResponsableId(String usuarioResponsableId) {
         this.usuarioResponsableId = usuarioResponsableId;
+    }
+
+    public void setGrupoPerteneciente(Grupo grupo){
+        this.grupoPertenece = grupo;
+    }
+
+    public Grupo getGrupoPerteneciente() {
+        return grupoPertenece;
     }
 
     public Evento(Parcel in){
