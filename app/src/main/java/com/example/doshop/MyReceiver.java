@@ -1,5 +1,5 @@
 package com.example.doshop;
-
+/*
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -33,3 +33,4 @@ public class MyReceiver extends BroadcastReceiver {
         notificationManager.notify(ID_NOTIFICACION++, mBuilder.build());
     }
 }
+*/

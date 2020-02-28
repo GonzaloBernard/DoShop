@@ -38,7 +38,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MisGrupos extends AppCompatActivity {
-    private final BroadcastReceiver br = new MyReceiver();
+    //private final BroadcastReceiver br = new MyReceiver();
     public static final String CHANNEL_ID="99999";
     private RecyclerView mRecyclerView;
     private List<Grupo> listaDataSet;
@@ -112,10 +112,11 @@ public class MisGrupos extends AppCompatActivity {
         mRecyclerView.setLayoutManager(mLayoutManager);
 
         //CREACION DEL CANAL DE NOTIFICACIONES
+        /*
         this.createNotificationChannel();
         IntentFilter filtro = new IntentFilter();
         registerReceiver(br, filtro);
-
+*/
 
     }
 
@@ -200,10 +201,13 @@ public class MisGrupos extends AppCompatActivity {
         }
     }
 
+    /*
     @Override
     public void onDestroy() {
         unregisterReceiver(br);
         super.onDestroy();
     }
+    
+     */
 
 }
