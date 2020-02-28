@@ -39,18 +39,17 @@ public class MisListas extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_abmc_evento, menu);
+        getMenuInflater().inflate(R.menu.menu_productos, menu);
         return super.onCreateOptionsMenu(menu);
     }
-    /*
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case R.id.menuGruposAgregarProducto:
                 Intent i1 = new Intent(MisListas.this, AbmcProduct.class);
                 //EL MODO DETERMINA LA ACCION A REALIZAR
-                i1.putExtra(GrupoAdapter._ABMC_EVENTO_MODO_KEY, ProductoAdapter._KEY_CREAR_PRODUCTO );
+                i1.putExtra(ProductoAdapter._ABMC_PRODUCTO_MODO_KEY, ProductoAdapter._KEY_CREAR_PRODUCTO);
                 startActivity(i1);
                 return true;
             case android.R.id.home:
@@ -61,7 +60,7 @@ public class MisListas extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,8 +99,8 @@ public class MisListas extends AppCompatActivity {
         moveTaskToBack(true);
     }
 
-    @Override
-    protected void onStart() {
+    //@Override
+    /*protected void onStart() {
         super.onStart();
 
         databaseEventos.addValueEventListener(new ValueEventListener() {
@@ -131,7 +130,7 @@ public class MisListas extends AppCompatActivity {
 
             }
         });
-    }
+    }*/
 
 
 
