@@ -85,7 +85,6 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
         holder.bFilaGrupoMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-
                 //creating a popup menu
                 PopupMenu popup = new PopupMenu(context, holder.bFilaGrupoMenu);
                 //inflating menu from xml resource
@@ -111,7 +110,6 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoHolder>
                                 ((Activity) context).startActivity(intent);
                                 return true;
                             case R.id.menuGestionGruposEliminarGrupo:
-
                                 AlertDialog.Builder builder = new AlertDialog.Builder(view.getContext());
                                 builder.setMessage("Quiere eliminar el grupo?")
                                         .setTitle("ELIMINAR GRUPO")

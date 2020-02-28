@@ -16,6 +16,7 @@ public class ProductoDataBase {
     }
 
     DatabaseReference databaseProductos = FirebaseDatabase.getInstance().getReference("productos");
+
     public void agregarProducto(Producto product){
         String eventoID = FirebaseAuth.getInstance().getUid();
 

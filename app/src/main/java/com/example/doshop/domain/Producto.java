@@ -2,6 +2,7 @@ package com.example.doshop.domain;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.Editable;
 
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ public class Producto implements Parcelable {
 
 
     public Producto(){}
+
     public Producto(Parcel in){
         readFromParcel(in);
     }
@@ -47,7 +49,7 @@ public class Producto implements Parcelable {
     }
 
     public void setProductoPrecio(Float productoPrecio) {
-        this.productoPrecio = productoPrecio;
+        this.productoPrecio = Float.valueOf(String.valueOf(productoPrecio));
     }
 
     @Override
