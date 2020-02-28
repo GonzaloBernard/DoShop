@@ -38,11 +38,11 @@ public class AbmcProduct extends AppCompatActivity {
     private ImageView imgvFotoProducto;
     private String imagenProduct;
 
-    /*
+
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_productos, menu);
+        getMenuInflater().inflate(R.menu.menu_abmc_evento, menu);
         return super.onCreateOptionsMenu(menu);
-    }*/
+    }
 
 
     protected void onCreate(Bundle savedInstanceState) {

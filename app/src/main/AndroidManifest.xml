@@ -11,12 +11,22 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+        <service
+            android:name=".FirebaseMessaging"
+            android:exported="false"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".AbmcGrupo"
-            android:parentActivityName=".MisGrupos"></activity>
+            android:parentActivityName=".MisGrupos" />
         <activity
             android:name=".AbmcEvento"
-            android:parentActivityName=".MisGrupos"></activity>
+            android:parentActivityName=".MisGrupos" />
         <activity android:name=".LoginUsuario">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,10 +34,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MisGrupos"></activity>
-        <activity
-            android:name=".MisListas"></activity>
+        <activity android:name=".MisGrupos" />
+        <activity android:name=".MisListas" />
     </application>
 
 </manifest>
