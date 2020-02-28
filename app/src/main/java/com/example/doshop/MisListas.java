@@ -94,10 +94,6 @@ public class MisListas extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        moveTaskToBack(true);
-    }
 
     //@Override
     /*protected void onStart() {
