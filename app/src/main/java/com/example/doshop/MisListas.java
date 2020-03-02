@@ -32,10 +32,12 @@ public class MisListas extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.menuGruposAgregarProducto:
+                /*
                 Intent i1 = new Intent(MisListas.this, AbmcProduct.class);
                 //EL MODO DETERMINA LA ACCION A REALIZAR
                 i1.putExtra(GrupoAdapter._ABMC_EVENTO_MODO_KEY, ProductoAdapter._KEY_CREAR_PRODUCTO );
                 startActivity(i1);
+                 */
                 return true;
 
             case android.R.id.home:
